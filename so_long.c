@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 15:24:38 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/09 17:30:40 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_rows(const char *argv)
 	fd = open(argv, O_RDONLY);
 	line = get_next_line(fd);
 	if (line == NULL)
-		exit_error("Incomplete map: no rows");
+		exit_error("Empty or nonextent map");
 	//checar qual o minimo de rows (talvez 3) em um valid map e se preciso fazer validation
 	nb_lines = 0;
 	while (line != NULL)
@@ -79,6 +79,6 @@ int	main(int argc, char **argv)
 	if (!valid_map(map))
 	{
 		free_array(map);
-		exit;
+		exit(1);
 	}
 }

@@ -1,0 +1,6 @@
+OK - Check if the programs receives one, and just one argument
+OK - Check if the argument is valid
+	OK - Valid extention (.ber)
+	OK - Read map
+	OK - Follow the ruller for player, collectables, exit and walls
+	OK - check if map is empty or do not exists

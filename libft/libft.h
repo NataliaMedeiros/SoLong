@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 11:03:51 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 15:10:18 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/09 15:35:10 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ char	*ft_strcpy(char *dst, const char *src);
 char	*get_next_line(int fd);
 size_t	find_nl(char *text);
 char	*ft_join_str(char *prev_line, char *text);
-int	ft_strlen_up_to_nl(const char *s);
+int		ft_strlen_nl(const char *s);
 
 #endif

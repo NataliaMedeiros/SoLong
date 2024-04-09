@@ -6,7 +6,7 @@ FILES = ft_bzero.c \
 		ft_strcmp.c \
 		ft_strcpy.c \
 		ft_strlen.c \
-		ft_strlen_up_to_nl.c \
+		ft_strlen_nl.c \
 		get_next_line_utils.c \
 		get_next_line.c \
 

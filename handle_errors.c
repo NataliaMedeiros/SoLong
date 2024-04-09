@@ -6,38 +6,11 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 11:35:17 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 15:25:38 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/09 17:40:49 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[i])
-		i++;
-	while (i >= 0)
-		free (args[i--]);
-	if (args)
-		free (args);
-}
-
-void	exit_error(char *error_message)
-{
-	ft_putendl_fd(2, "Error");
-	ft_putendl_fd(2, error_message);
-	exit (1);
-}
-
-int	error(char *error_message)
-{
-	ft_putendl_fd(2, "Error");
-	ft_putendl_fd(2, error_message);
-	return (1);
-}
 
 void	check_extention(char *argv)
 {
@@ -50,53 +23,29 @@ void	check_extention(char *argv)
 		exit_error(error_message);
 }
 
-int	rowlen(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i] != NULL)
-		i++;
-	return (i);
-}
-
-void	check_map(char **map)
+int	count_component(char **map, char c)
 {
 	int	i;
 	int	j;
-	int	p;
-	int	e;
-	int	c;
+	int	nb;
 
 	i = 0;
-	p = 0;
-	e = 0;
-	c = 0;
-	while(map[i] != NULL)
+	nb = 0;
+	while (map[i] != NULL)
 	{
 		j = 0;
 		while (map[i][j] != '\n')
 		{
-			if ((i == 0 || j == 0 || i == rowlen(map) - 1
-					|| j == (int)ft_strlen(map[i]) - 2) && map[i][j] != '1')
-				exit_error("Invalid wall");
-			if (map[i][j] == 'P')
-				p++;
-			else if (map[i][j] == 'E')
-				e++;
-			else if (map[i][j] == 'C')
-				c++;
-			else if (map[i][j] != '1' && map[i][j] != '0')
-				exit_error("Ivalid component, check map");
+			if (map[i][j] == c)
+				nb++;
 			j++;
 		}
 		i++;
 	}
-	if (p != 1 || e != 1 | c < 1)
-		exit_error("Check amount of player, exit and colectables");
+	return (nb);
 }
 
-bool	valid_map(char **map)
+bool	valid_wall_and_components(char **map)
 {
 	int	i;
 	int	j;
@@ -108,10 +57,33 @@ bool	valid_map(char **map)
 		j = 0;
 		while (map[i][j] != '\n')
 		{
-			check_wall(map[i][j]);
+			if ((i == 0 || j == 0 || i == rowlen(map) - 1
+					|| j == ft_strlen_nl(map[i]) - 1) && map[i][j] != '1')
+				return (error("Invalid wall"), false);
+			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
+				&& map[i][j] != 'E' && map[i][j] != 'C')
+				return (error("invalid component"), false);
 			j++;
 		}
 		i++;
 	}
+	return (true);
+}
+
+bool	valid_map(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	if (!valid_wall_and_components(map))
+		return (false);
+	if (count_component(map, 'P') != 1)
+		return (error("Check Player's amount"), false);
+	if (count_component(map, 'E') != 1)
+		return (error("Check Exit's amount"), false);
+	if (count_component(map, 'C') < 1)
+		return (error("Check Colectable's amount"), false);
 	return (false);
 }

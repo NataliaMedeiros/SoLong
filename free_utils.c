@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_strlen_up_to_nl.c                               :+:    :+:            */
+/*   free.utils.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/04/09 11:02:52 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 15:10:09 by natalia       ########   odam.nl         */
+/*   Created: 2024/04/09 17:23:02 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/09 17:23:19 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-int	ft_strlen_up_to_nl(const char *s)
+void	free_array(char **args)
 {
-	int	len;
+	int	i;
 
-	len = 0;
-	while (s[len] != '\n')
-		len++;
-	return (len);
+	i = 0;
+	while (args[i])
+		i++;
+	while (i >= 0)
+		free (args[i--]);
+	if (args)
+		free (args);
 }

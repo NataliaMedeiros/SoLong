@@ -5,6 +5,8 @@ LIBFT = ./libft/libft.a
 
 FILES = so_long.c \
 		handle_errors.c \
+		free_utils.c \
+		error_utils.c \
 
 #BONUS_FILES =
 
@@ -14,7 +16,7 @@ OFILES = $(FILES:%.c=%.o)
 #OBONUS = $(CBONUS:%.c=%.o)
 
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 LIBFTDIR = libft
 
 all: $(NAME)
@@ -25,10 +27,10 @@ $(LIBFT):
 	@echo "Compiled ✅ $(LIBFT)"
 
 %.o: %.c
-	@$(CC) $(FLAGS) -c $< -o $@ -I $(LIBFTDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFTDIR)
 
 $(NAME): $(LIBFT) $(OFILES)
-	$(CC) $(FLAGS) $(OFILES) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OFILES) $(LIBFT) -o $(NAME)
 	@echo "Compiled push_swap ✅ $^"
 
 #bonus: $(LIBFT) $(OBONUS)
