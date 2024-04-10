@@ -79,6 +79,18 @@ echo -e "${PINK}test 15 - Invalid colectable:${RESET}"
 ./so_long maps/error/map_invalid_colectable.ber
 
 echo ""
+echo -e "${PINK}test 16 - Wrong shape:${RESET}"
+./so_long maps/error/map_wrong_shape.ber
+
+echo ""
+echo -e "${PINK}test 17 - Empty map:${RESET}"
+./so_long maps/error/map_empty.ber
+
+echo ""
+echo -e "${PINK}test 18 - No map:${RESET}"
+./so_long maps/error/no_map.ber
+
+echo ""
 echo -e "${PINK}test x - Good map:${RESET}"
 output=$(./so_long maps/map1.ber)
 if [ -z "$output" ]; then

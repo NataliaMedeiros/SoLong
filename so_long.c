@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 17:30:40 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/10 14:21:23 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,46 +19,53 @@ int	count_rows(const char *argv)
 	char	*line;
 
 	fd = open(argv, O_RDONLY);
+	if (fd < 0)
+		exit_error("Nonexistent map");
 	line = get_next_line(fd);
 	if (line == NULL)
-		exit_error("Empty or nonextent map");
+		exit_error("Empty map");
 	//checar qual o minimo de rows (talvez 3) em um valid map e se preciso fazer validation
 	nb_lines = 0;
 	while (line != NULL)
 	{
 		//printf("%s", line);
 		nb_lines++;
+		free(line);
 		line = get_next_line(fd);
 	}
 	//printf("line = %d\n", nb_lines);
 	return (nb_lines);
 }
 
-char	**read_map(const char *argv)
+void	read_map(char **map, const char *argv)
 {
-	char	**map;
 	int		fd;
 	int		i;
 	char	*line;
 	int		len_line;
 
-	map = (char **)malloc((count_rows(argv) + 1) * sizeof(char *));
-	if (!map)
-		return (NULL);
 	fd = open(argv, O_RDONLY);
 	i = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
 		len_line = ft_strlen(line);
-		//printf("len line = %d\n", len_line);
 		map[i] = malloc(len_line + 1);
 		map[i] = ft_strcpy(map[i], line);
-		//printf("map[%d] = %s", i, map[i]);
 		i++;
+		free(line);
 		line = get_next_line(fd);
 	}
-	return (map);
+	close(fd);
+}
+
+t_game	initialise_game_data(char **map)
+{
+	t_game	*game;
+
+	game = ft_calloc(1, sizeof(t_game));
+	if (game == NULL)
+		
 }
 
 int	main(int argc, char **argv)
@@ -67,8 +74,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		exit_error("No input");
-	check_extention(argv[1]);
-	map = read_map(argv[1]);
+	check_map_extention(argv[1]);
+	map = ft_calloc((count_rows(argv[1]) + 1), sizeof(char *));
+	if (!map)
+		return (1);
+	read_map(map, argv[1]);
 	// int i = 0;//just to print
 	// printf("after reading map:\n");
 	// while (map[i] != NULL)
@@ -81,4 +91,5 @@ int	main(int argc, char **argv)
 		free_array(map);
 		exit(1);
 	}
+	initialize_game_data(map);
 }

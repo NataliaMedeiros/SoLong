@@ -6,13 +6,13 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 11:35:17 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 17:40:49 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/10 13:11:36 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_extention(char *argv)
+void	check_map_extention(char *argv)
 {
 	char	*str;
 	char	*error_message;
@@ -70,6 +70,22 @@ bool	valid_wall_and_components(char **map)
 	return (true);
 }
 
+bool	check_map_shape(char **map)
+{
+	int		i;
+	size_t	len;
+
+	i = 0;
+	len = ft_strlen(map[i]);
+	while (map[i])
+	{
+		if (ft_strlen(map[i]) != len)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 bool	valid_map(char **map)
 {
 	int	i;
@@ -77,6 +93,8 @@ bool	valid_map(char **map)
 
 	i = 0;
 	j = 0;
+	if (check_map_shape(map) == false)
+		return (error("Map is not rectangular"), false);
 	if (!valid_wall_and_components(map))
 		return (false);
 	if (count_component(map, 'P') != 1)

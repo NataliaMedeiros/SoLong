@@ -1,7 +1,7 @@
 NAME = so_long
 #BONUS =
 LIBFT = ./libft/libft.a
-#MLX42 = ./MLX42/libmlx.dylib
+MLX42 = ./MLX42/libmlx42.a
 
 FILES = so_long.c \
 		handle_errors.c \
@@ -17,7 +17,9 @@ OFILES = $(FILES:%.c=%.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
+FLAGSMLX = -ldl -lglfw -pthread -lm  #ask Duda
 LIBFTDIR = libft
+MLX42DIR = MLX42
 
 all: $(NAME)
 
@@ -26,11 +28,17 @@ $(LIBFT):
 	@make -C $(LIBFTDIR)
 	@echo "Compiled ✅ $(LIBFT)"
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFTDIR)
+$(MLX42):
+	@echo "compiling ..."
+	cd MLX42DIR
+	@make -C $(MLX42DIR)
+	@echo "Compiled ✅ $(MLX42)"
 
-$(NAME): $(LIBFT) $(OFILES)
-	$(CC) $(CFLAGS) $(OFILES) $(LIBFT) -o $(NAME)
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(LIBFTDIR) -I $(MLX42DIR)
+
+$(NAME): $(LIBFT) $(MLX42) $(OFILES)
+	$(CC) $(CFLAGS) $(FLAGSMLX) $(OFILES) $(LIBFT) $(MLX42) -o $(NAME)
 	@echo "Compiled push_swap ✅ $^"
 
 #bonus: $(LIBFT) $(OBONUS)

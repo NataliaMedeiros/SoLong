@@ -1,6 +1,7 @@
 NAME = libft.a
 
 FILES = ft_bzero.c \
+		ft_calloc.c \
 		ft_putendl_fd.c \
 		ft_strchr.c \
 		ft_strcmp.c \
