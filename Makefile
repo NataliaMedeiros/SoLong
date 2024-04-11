@@ -17,7 +17,8 @@ OFILES = $(FILES:%.c=%.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-FLAGSMLX = -ldl -lglfw -pthread -lm  #ask Duda
+FLAGSMLX = -ldl -lglfw -pthread -lm
+#FLAGSMLX = -L/opt/homebrew/lib -lglfw -lm
 LIBFTDIR = libft
 MLX42DIR = MLX42
 

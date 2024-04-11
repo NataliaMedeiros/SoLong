@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/10 14:21:23 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/11 12:15:03 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,23 @@ void	read_map(char **map, const char *argv)
 	close(fd);
 }
 
-t_game	initialise_game_data(char **map)
+t_game	*initialize_game_data(char **map)
 {
 	t_game	*game;
 
 	game = ft_calloc(1, sizeof(t_game));
 	if (game == NULL)
-		
+		return (game);
+	game->map = map;
+	game->height = rowlen(map);
+	game->width = ft_strlen_nl(map[0]);
+	return (game);
 }
 
 int	main(int argc, char **argv)
 {
 	char	**map;
+	t_game	*game;
 
 	if (argc != 2)
 		exit_error("No input");
@@ -91,5 +96,6 @@ int	main(int argc, char **argv)
 		free_array(map);
 		exit(1);
 	}
-	initialize_game_data(map);
+	game = initialize_game_data(map);
+	mlx_init(game->height, game->width, "SoLong", false);
 }

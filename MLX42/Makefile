@@ -6,6 +6,7 @@ INCLUDE_DIR	:= include
 
 override HEADERS += -I $(INCLUDE_DIR)
 
+CC := cc
 CFLAGS :=	-Wextra -Wall -Werror -Wunreachable-code -Wno-char-subscripts -Wno-sign-compare \
 			-DLODEPNG_NO_COMPILE_ANCILLARY_CHUNKS -DLODEPNG_NO_COMPILE_ENCODER
 ifdef DEBUG
@@ -36,7 +37,8 @@ else
 		include Makefile_Unix.mk
 	else ifeq ($(UNAME_S), Darwin)
 		# Default
-		DYLIB_EXISTS := test -e /usr/local/lib/libglfw.3.dylib || echo "false"
+#		DYLIB_EXISTS := test -e /usr/local/lib/libglfw.3.dylib || echo "false"
+		DYLIB_EXISTS := test -e /opt/homebrew/lib/libglfw.3.dylib@ || echo "false"
 
 		# Generic Homebrew path
 		ifneq ($(DYLIB_EXISTS), false)
@@ -52,6 +54,10 @@ else
 $(error OS: $(OS) - Is not supported!)
 	endif
 endif
+
+#ifeq ($(shell uname -m), arm64)
+#    CFLAGS += -arch arm64
+#endif
 
 #//= Make Rules =//#
 all: $(SHDR) $(NAME)
