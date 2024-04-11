@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/10 14:16:09 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/11 15:02:21 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,28 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdbool.h>
+# include <string.h>
+
+typedef struct s_image
+{
+	mlx_image_t	*grass;
+}				t_image;
 
 typedef struct s_game
 {
 	char	**map;
 	int		width;
 	int		height;
+	mlx_t	*mlx;
+	t_image	*images;
 	// TO DO: still implement elements (if add somenthing change on in initialize game)
 }				t_game;
+
+typedef struct s_vector2D
+{
+	int	x;
+	int	y;
+}	t_vector2D;
 
 
 /*error_utils*/
@@ -41,6 +55,7 @@ bool	valid_map(char **map);
 
 /*free_utils*/
 void	free_array(char **args);
+void	free_array_and_exit(char **args);
 
 
 #endif

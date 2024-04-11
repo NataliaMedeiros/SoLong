@@ -1,7 +1,7 @@
 NAME = so_long
 #BONUS =
 LIBFT = ./libft/libft.a
-MLX42 = ./MLX42/libmlx42.a
+MLX42 = ./MLX42/build/libmlx42.a
 
 FILES = so_long.c \
 		handle_errors.c \
@@ -17,8 +17,8 @@ OFILES = $(FILES:%.c=%.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-FLAGSMLX = -ldl -lglfw -pthread -lm
-#FLAGSMLX = -L/opt/homebrew/lib -lglfw -lm
+#FLAGSMLX = -ldl -lglfw -pthread -lm
+FLAGSMLX = -L/opt/homebrew/lib -lglfw -lm
 LIBFTDIR = libft
 MLX42DIR = MLX42
 
@@ -31,8 +31,8 @@ $(LIBFT):
 
 $(MLX42):
 	@echo "compiling ..."
-	cd MLX42DIR
-	@make -C $(MLX42DIR)
+	@cmake $(MLX42DIR) -B $(MLX42DIR)/build && make -C $(MLX42DIR)/build -j4
+#	@make -C $(MLX42DIR)
 	@echo "Compiled ✅ $(MLX42)"
 
 %.o: %.c

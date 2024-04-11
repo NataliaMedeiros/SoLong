@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   free.utils.c                                       :+:    :+:            */
+/*   free_utils.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 17:23:02 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 17:23:19 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/11 14:10:15 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,18 @@ void	free_array(char **args)
 		free (args[i--]);
 	if (args)
 		free (args);
+}
+
+void	free_array_and_exit(char **args)
+{
+	int	i;
+
+	i = 0;
+	while (args[i])
+		i++;
+	while (i >= 0)
+		free (args[i--]);
+	if (args)
+		free (args);
+	exit (1);
 }

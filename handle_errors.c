@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 11:35:17 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/10 13:11:36 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/11 13:22:52 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ bool	valid_map(char **map)
 		return (error("Check Exit's amount"), false);
 	if (count_component(map, 'C') < 1)
 		return (error("Check Colectable's amount"), false);
-	return (false);
+	return (true);
 }
