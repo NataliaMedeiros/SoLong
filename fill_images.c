@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:56:45 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 16:29:33 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/12 21:32:58 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ void	fill_components(t_game	*game)
 	int		width;
 	int		height;
 
-	width = 0;
 	height = 0;
 	while (height < game->height)
 	{

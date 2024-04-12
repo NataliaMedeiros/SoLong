@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 16:28:17 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/12 21:25:27 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_vector2D
 /*error_utils*/
 void	exit_error(char *error_message);
 int		error(char *error_message);
-int		rowlen(char **map);
+int		height_map(char **map);
 
 /*handle_errors*/
 void	check_map_extention(char *argv);

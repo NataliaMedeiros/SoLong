@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   error_utils.c                                      :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: natalia <natalia@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/04/09 17:36:43 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/09 17:37:17 by natalia       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   error_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/09 17:36:43 by natalia           #+#    #+#             */
+/*   Updated: 2024/04/12 21:25:30 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	error(char *error_message)
 	return (1);
 }
 
-int	rowlen(char **map)
+int	height_map(char **map)
 {
 	int	i;
 

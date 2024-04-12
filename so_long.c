@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 16:33:44 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/12 21:33:04 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_game	*initialize_game_data(char **map)
 	if (game == NULL)
 		return (game);
 	game->map = map;
-	game->height = rowlen(map);
+	game->height = height_map(map);
 	game->width = ft_strlen_nl(map[0]);
 	game->mlx = mlx_init(game->width * PIXELS, game->height * PIXELS,
 			"SoLong", true);
@@ -88,7 +88,7 @@ t_image	*initialize_images_data(mlx_t	*mlx)
 	images = load_player_texture(mlx, images);
 	images = load_collectable_texture(mlx, images);
 	images = load_exit_texture(mlx, images);
-	images = load_yeow_texture(mlx, images);
+	images = load_yeow_texture(mlx, images); //TODO if don't work delete
 	return (images);
 }
 
@@ -165,19 +165,14 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	read_map(map, argv[1]);
 	if (!valid_map(map))
-		free_array_and_exit(map); //TO DO testar se ficou sem leaks mesmo
+		free_array_and_exit(map); // TODO testar se ficou sem leaks mesmo
 	game = initialize_game_data(map);
 	game->images = initialize_images_data(game->mlx);
-	printf("Image initialized\n");
 	fill_background(game);
 	fill_components(game);
 	set_player_position(&game);
 	count_collectables(&game);
 	printf("x = %d and y = %d\n", game->player_position_x, game->player_position_y);
-	//game = move_up(game);
-	// game = move_right(game);
-	// game = move_down(game);
-	// game = move_left(game);
 	printf("background filled with success\n");
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);
