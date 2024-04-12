@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 14:39:39 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/12 16:33:44 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ t_image	*initialize_images_data(mlx_t	*mlx)
 	images = load_player_texture(mlx, images);
 	images = load_collectable_texture(mlx, images);
 	images = load_exit_texture(mlx, images);
+	images = load_yeow_texture(mlx, images);
 	return (images);
 }
 
@@ -118,14 +119,37 @@ void	set_player_position(t_game	**game)
 		{
 			if ((*game)->map[x][y] == 'P')
 			{
-				(*game)->player_position_x = x; //coluna
-				(*game)->player_position_y = y; //linha
+				(*game)->player_position_x = x;
+				(*game)->player_position_y = y;
 				return ;
 			}
 			y++;
 		}
 		x++;
 	}
+}
+
+void	count_collectables(t_game	**game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	(*game)->total_collectable = 0;
+	while (x < (*game)->height)
+	{
+		y = 0;
+		while (y < (*game)->width)
+		{
+			if ((*game)->map[x][y] == 'C')
+			{
+				(*game)->total_collectable++;
+			}
+			y++;
+		}
+		x++;
+	}
+	printf("total collectable = %d\n", (*game)->total_collectable);
 }
 
 int	main(int argc, char **argv)
@@ -148,12 +172,14 @@ int	main(int argc, char **argv)
 	fill_background(game);
 	fill_components(game);
 	set_player_position(&game);
+	count_collectables(&game);
 	printf("x = %d and y = %d\n", game->player_position_x, game->player_position_y);
-	game = move_up(game);
-	game = move_right(game);
-	game = move_down(game);
-	game = move_left(game);
+	//game = move_up(game);
+	// game = move_right(game);
+	// game = move_down(game);
+	// game = move_left(game);
 	printf("background filled with success\n");
+	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
 }

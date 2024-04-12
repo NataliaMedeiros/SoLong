@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 13:56:45 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 13:58:19 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/12 16:29:33 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,22 @@ void	load_component_images(t_game *game, int width, int height)
 
 void	fill_background(t_game *data)
 {
-	int		x;
-	int		y;
+	int		width;
+	int		height;
 
-	x = 0;
-	y = 0;
-	while (y < data->height)
+	width = 0;
+	height = 0;
+	while (height < data->height)
 	{
-		x = 0;
-		while (x < data->width)
+		width = 0;
+		while (width < data->width)
 		{
 			if (mlx_image_to_window(data->mlx, data->images->floor,
-					x * PIXELS, y * PIXELS) < 0)
+					width * PIXELS, height * PIXELS) < 0)
 				error("Failed to put image to window");
-			x++;
+			width++;
 		}
-		y++;
+		height++;
 	}
 }
 

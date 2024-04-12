@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 14:38:21 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/12 16:28:17 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_image
 	mlx_image_t	*player;
 	mlx_image_t	*collectable;
 	mlx_image_t	*exit;
+	mlx_image_t	*yeow;
 }				t_image;
 
 typedef struct s_game
@@ -42,6 +43,8 @@ typedef struct s_game
 	t_image	*images;
 	int		player_position_x; //row
 	int		player_position_y; //collum
+	int		total_collectable;
+	int		collected_collectables;
 	// TO DO: still implement elements (if add somenthing change on in initialize game)
 }				t_game;
 
@@ -71,6 +74,7 @@ t_image	*load_wall_texture(mlx_t *mlx, t_image *image);
 t_image	*load_player_texture(mlx_t *mlx, t_image *image);
 t_image	*load_collectable_texture(mlx_t *mlx, t_image *image);
 t_image	*load_exit_texture(mlx_t *mlx, t_image *image);
+t_image	*load_yeow_texture(mlx_t *mlx, t_image *image);
 
 /*fill_images*/
 void	fill_background(t_game *data);
@@ -82,5 +86,6 @@ t_game	*move_up(t_game	*game);
 t_game	*move_down(t_game	*game);
 t_game	*move_right(t_game	*game);
 t_game	*move_left(t_game	*game);
+void	ft_hook_moves(mlx_key_data_t key_data, void *mlx);
 
 #endif
