@@ -7,6 +7,9 @@ FILES = so_long.c \
 		handle_errors.c \
 		free_utils.c \
 		error_utils.c \
+		textures.c \
+		fill_images.c \
+		movements.c \
 
 #BONUS_FILES =
 

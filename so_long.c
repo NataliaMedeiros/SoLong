@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   so_long.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: natalia <natalia@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/11 15:02:53 by natalia       ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
+/*   Updated: 2024/04/12 14:39:39 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,53 +69,62 @@ t_game	*initialize_game_data(char **map)
 	game->map = map;
 	game->height = rowlen(map);
 	game->width = ft_strlen_nl(map[0]);
+	game->mlx = mlx_init(game->width * PIXELS, game->height * PIXELS,
+			"SoLong", true);
+	if (!game->mlx)
+		free_array_and_exit(map);
 	return (game);
-}
-
-t_image	*load_grass_texture(mlx_t *mlx, t_image *img)
-{
-	mlx_texture_t	*grass;
-
-	grass = mlx_load_png("./images/Grass2.png");
-	if (!grass)
-		error("Problem with loading png");
-	img->grass = mlx_texture_to_image(mlx, grass);
-	if (!img->grass)
-		error("Problem with texture to image");
-	mlx_delete_texture (grass);
-	return (img);
 }
 
 t_image	*initialize_images_data(mlx_t	*mlx)
 {
 	t_image	*images;
 
-	printf("Inside of initialize_images_data");
 	images = ft_calloc(1, sizeof(t_image));
 	if (!images)
 		return (NULL);
-	images = load_grass_texture(mlx, images);
+	images = load_floor_texture(mlx, images);
+	images = load_wall_texture(mlx, images);
+	images = load_player_texture(mlx, images);
+	images = load_collectable_texture(mlx, images);
+	images = load_exit_texture(mlx, images);
 	return (images);
 }
 
-void	fill_background(t_game *data)
+//TO DO remove function
+void	print_map(char **map)
 {
-	int		x;
-	int		y;
+	int i;
+
+	i = 0;
+	printf("after reading map:\n");
+	while (map[i] != NULL)
+	{
+		printf("%s", map[i]);
+		i++;
+	}
+}
+
+void	set_player_position(t_game	**game)
+{
+	int	x;
+	int	y;
 
 	x = 0;
-	y = 0;
-	while (y < data->height)
+	while (x < (*game)->height)
 	{
-		x = 0;
-		while (x < data->width)
+		y = 0;
+		while (y < (*game)->width)
 		{
-			if (mlx_image_to_window(data->mlx, data->images->grass,
-					x * 64, y * 64) < 0)
-				error("Failed to put image to window");
-			x++;
+			if ((*game)->map[x][y] == 'P')
+			{
+				(*game)->player_position_x = x; //coluna
+				(*game)->player_position_y = y; //linha
+				return ;
+			}
+			y++;
 		}
-		y++;
+		x++;
 	}
 }
 
@@ -123,46 +132,28 @@ int	main(int argc, char **argv)
 {
 	char	**map;
 	t_game	*game;
-	// t_image	*images;
 
 	if (argc != 2)
 		exit_error("No input");
 	check_map_extention(argv[1]);
 	map = ft_calloc((count_rows(argv[1]) + 1), sizeof(char *));
 	if (!map)
-		return (1);
+		return (EXIT_FAILURE);
 	read_map(map, argv[1]);
-	int i = 0;//just to print
-	printf("after reading map:\n");
-	while (map[i] != NULL)
-	{
-		printf("%s", map[i]);
-		i++;
-	}
 	if (!valid_map(map))
 		free_array_and_exit(map); //TO DO testar se ficou sem leaks mesmo
 	game = initialize_game_data(map);
-	printf("%d, %d\n", game->height, game->width);
-	/*start mlx*/
-	game->mlx = mlx_init(game->height, game->width, "SoLong", false);
-	if (!game->mlx)
-		free_array_and_exit(map);
-	printf("Game_data successuful initialized\n");
-	/*create a new image*/
-	mlx_image_t* img = mlx_new_image(game->mlx, 512, 512);
-	if (!img)
-		error("Erro na criacao da imagem\n");
-
-	// Set every pixel to white
-	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-
-	// Display an instance of the image
-	if (mlx_image_to_window(game->mlx, img, 0, 0) < 0)
-        error("Erro on display image instance\n");
-
-	// images = initialize_images_data(game->mlx);
-	// game->images = images;
-	// fill_background(game);
-	// printf("background filled with success\n");
+	game->images = initialize_images_data(game->mlx);
+	printf("Image initialized\n");
+	fill_background(game);
+	fill_components(game);
+	set_player_position(&game);
+	printf("x = %d and y = %d\n", game->player_position_x, game->player_position_y);
+	game = move_up(game);
+	game = move_right(game);
+	game = move_down(game);
+	game = move_left(game);
+	printf("background filled with success\n");
 	mlx_loop(game->mlx);
+	mlx_terminate(game->mlx);
 }
