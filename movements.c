@@ -6,33 +6,28 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:01:35 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 21:17:41 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/12 22:13:06 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	look_for_collectable(int position_x, int position_y, t_game *game)
+void	look_for_collectable(int height, int width, t_game *game)
 {
 	int	i;
 
 	i = 0;
-	if ((game)->map[position_x][position_y] == 'C')
+	if ((game)->map[height][width] == 'C')
 	{
-		printf("entrei i = %d and total coins %d\n", i, game->total_collectable);
 		while (i < game->total_collectable)
 		{
-			printf("entrei i = %d and total coins %d\n", i, game->total_collectable);
-			printf("position x %d and position y %d\n", position_x, position_y);
-			printf("col x %d\n", game->images->collectable->instances[i].y / PIXELS);
-			printf("col y %d\n", game->images->collectable->instances[i].x / PIXELS);
-			if (((game->images->collectable->instances[i].y) / PIXELS) == position_x
-				&& ((game->images->collectable->instances[i].x) / PIXELS) == position_y)
+			if (((game->images->collectable->instances[i].y) / PIXELS) == height
+				&& ((game->images->collectable->instances[i].x) / PIXELS)
+				== width)
 			{
-				printf("entrei\n");
 				(game)->collected_collectables++;
 				(game)->images->collectable->instances[i].enabled = false;
-				(game)->map[position_x][position_y] = '0';
+				(game)->map[height][width] = '0';
 			}
 			i++;
 		}
@@ -104,22 +99,18 @@ void	ft_hook_moves(mlx_key_data_t key_data, void *mlx)
 	t_game	*game;
 
 	game = (t_game *)mlx;
-	if (key_data.key == MLX_KEY_UP && key_data.action == MLX_PRESS)
-	{
+	if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
+		mlx_close_window(game->mlx);
+	if ((key_data.key == MLX_KEY_UP || key_data.key == MLX_KEY_W )
+		&& key_data.action == MLX_PRESS)
 		move_up(game);
-	}
-	if (key_data.key == MLX_KEY_DOWN && key_data.action == MLX_PRESS)
-	{
+	if ((key_data.key == MLX_KEY_DOWN || key_data.key == MLX_KEY_S )
+		&& key_data.action == MLX_PRESS)
 		move_down(game);
-	}
-	if (key_data.key == MLX_KEY_RIGHT && key_data.action == MLX_PRESS)
-	{
+	if ((key_data.key == MLX_KEY_RIGHT || key_data.key == MLX_KEY_D )
+		&& key_data.action == MLX_PRESS)
 		move_right(game);
-	}
-	if (key_data.key == MLX_KEY_LEFT && key_data.action == MLX_PRESS)
-	{
+	if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A )
+		&& key_data.action == MLX_PRESS)
 		move_left(game);
-	}
-	printf("colatables colectes%d\n", game->collected_collectables);
 }
-
