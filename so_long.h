@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 21:25:27 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/13 10:01:07 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ typedef struct s_game
 	int		height;
 	mlx_t	*mlx;
 	t_image	*images;
-	int		player_position_x; //row
-	int		player_position_y; //collum
+	int		player_position_x;
+	int		player_position_y;
+	int		exit_position_x;
+	int		exit_position_y;
 	int		total_collectable;
 	int		collected_collectables;
+	int		total_moves;
 	// TO DO: still implement elements (if add somenthing change on in initialize game)
 }				t_game;
 

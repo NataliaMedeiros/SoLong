@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 21:46:16 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/13 10:06:09 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_game	*initialize_game_data(char **map)
 			"SoLong", true);
 	if (!game->mlx)
 		free_array_and_exit(map);
+	game->total_moves = 0;
+	game->total_collectable = 0;
 	return (game);
 }
 
@@ -129,6 +131,29 @@ void	set_player_position(t_game	**game)
 	}
 }
 
+void	set_exit_position(t_game	**game)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < (*game)->height)
+	{
+		y = 0;
+		while (y < (*game)->width)
+		{
+			if ((*game)->map[x][y] == 'E')
+			{
+				(*game)->exit_position_x = x;
+				(*game)->exit_position_y = y;
+				return ;
+			}
+			y++;
+		}
+		x++;
+	}
+}
+
 void	count_collectables(t_game	**game)
 {
 	int	x;
@@ -171,6 +196,7 @@ int	main(int argc, char **argv)
 	fill_background(game);
 	fill_components(game);
 	set_player_position(&game);
+	set_exit_position(&game);
 	count_collectables(&game);
 	printf("x = %d and y = %d\n", game->player_position_x, game->player_position_y);
 	printf("background filled with success\n");

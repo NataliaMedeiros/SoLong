@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:01:35 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 22:13:06 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/13 10:06:38 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_game	*move_up(t_game	*game)
 	{
 		game->images->player->instances[0].y -= PIXELS;
 		game->player_position_x--;
+		game->total_moves++;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 	}
@@ -54,6 +55,7 @@ t_game	*move_down(t_game	*game)
 	{
 		game->images->player->instances[0].y += PIXELS;
 		game->player_position_x++;
+		game->total_moves++;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 	}
@@ -72,6 +74,7 @@ t_game	*move_right(t_game	*game)
 	{
 		game->images->player->instances[0].x += PIXELS;
 		game->player_position_y++;
+		game->total_moves++;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 	}
@@ -86,6 +89,7 @@ t_game	*move_left(t_game	*game)
 	{
 		game->images->player->instances[0].x -= PIXELS;
 		game->player_position_y--;
+		game->total_moves++;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 	}
@@ -113,4 +117,5 @@ void	ft_hook_moves(mlx_key_data_t key_data, void *mlx)
 	if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A )
 		&& key_data.action == MLX_PRESS)
 		move_left(game);
+	printf("moves: %d\n", game->total_moves);
 }
