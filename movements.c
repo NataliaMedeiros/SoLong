@@ -6,12 +6,26 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:01:35 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 12:36:42 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 20:20:22 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+void	print_moves(t_game *game)
+{
+	char	*string;
+	char	moves[10];
+
+	string = ft_itoa(game->total_moves);
+	strcpy(moves, "Moves: ");
+	strcat(moves, string);
+	printf("AQUI%s\n", moves);
+	mlx_delete_image(game->mlx, game->images->moves_print);
+	game->images->moves_print = mlx_put_string(game->mlx, moves,
+			16, game->height * 64 - 44);
+	free(string);
+}
 
 t_game	*move_up(t_game	*game)
 {
@@ -96,6 +110,7 @@ void	ft_hook_moves(mlx_key_data_t key_data, void *mlx)
 	if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A )
 		&& key_data.action == MLX_PRESS)
 		move_left(game);
+	print_moves(game);
 	collected_all_collectable(game);
 	printf("moves: %d\n", game->total_moves);
 }

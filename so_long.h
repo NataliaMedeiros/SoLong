@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 15:05:47 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 19:38:57 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_image
 	mlx_image_t	*collectable;
 	mlx_image_t	*exit;
 	mlx_image_t	*yeow;
+	mlx_image_t	*moves_print;
 }				t_image;
 
 typedef struct s_game

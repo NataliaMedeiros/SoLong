@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 15:07:23 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 20:21:04 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,15 @@ void	print_map(char **map) //TO DO remove function
 	}
 }
 
+void	string_to_screen(t_game *game)
+{
+	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",
+			16, game->height * 64 - 44);
+	// mlx_image_to_window(game->mlx, game->images->collectable,
+	// 	140, game->height * 64 - 50);
+	// mlx_put_string(game->mlx, ":", 160, game->height * 64 - 44);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**map;
@@ -109,6 +118,7 @@ int	main(int argc, char **argv)
 	fill_components(game);
 	if (!valid_path(game))
 		printf("path not valid\n");
+	string_to_screen(game);
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
