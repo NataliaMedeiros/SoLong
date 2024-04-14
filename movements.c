@@ -6,33 +6,12 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:01:35 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/13 10:06:38 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 12:36:42 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	look_for_collectable(int height, int width, t_game *game)
-{
-	int	i;
-
-	i = 0;
-	if ((game)->map[height][width] == 'C')
-	{
-		while (i < game->total_collectable)
-		{
-			if (((game->images->collectable->instances[i].y) / PIXELS) == height
-				&& ((game->images->collectable->instances[i].x) / PIXELS)
-				== width)
-			{
-				(game)->collected_collectables++;
-				(game)->images->collectable->instances[i].enabled = false;
-				(game)->map[height][width] = '0';
-			}
-			i++;
-		}
-	}
-}
 
 t_game	*move_up(t_game	*game)
 {
@@ -117,5 +96,6 @@ void	ft_hook_moves(mlx_key_data_t key_data, void *mlx)
 	if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A )
 		&& key_data.action == MLX_PRESS)
 		move_left(game);
+	collected_all_collectable(game);
 	printf("moves: %d\n", game->total_moves);
 }

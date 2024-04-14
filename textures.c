@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 10:35:18 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 15:50:59 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 14:57:47 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_image	*load_exit_texture(mlx_t *mlx, t_image *image)
 	return (image);
 }
 
-t_image	*load_yeow_texture(mlx_t *mlx, t_image *image)
+t_image	*load_yeow_texture(mlx_t *mlx, t_image *image) // TODO remove if didn't work
 {
 	mlx_texture_t	*youw;
 

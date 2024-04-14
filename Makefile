@@ -10,6 +10,9 @@ FILES = so_long.c \
 		textures.c \
 		fill_images.c \
 		movements.c \
+		game_checker.c \
+		initialize_game.c \
+		check_path.c \
 
 #BONUS_FILES =
 

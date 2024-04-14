@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/13 10:01:07 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 15:05:47 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,18 @@ t_game	*move_down(t_game	*game);
 t_game	*move_right(t_game	*game);
 t_game	*move_left(t_game	*game);
 void	ft_hook_moves(mlx_key_data_t key_data, void *mlx);
+
+/*game_checker*/
+void	collected_all_collectable(t_game *game);
+void	look_for_collectable(int height, int width, t_game *game);
+
+/*initialize_game*/
+void	initialize_game_data(t_game **game, char **map);
+void	set_player_position(t_game	**game);
+void	set_exit_position(t_game	**game);
+void	count_collectables(t_game	**game);
+
+/*check_path*/
+bool	valid_path(t_game *game);
 
 #endif
