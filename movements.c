@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:01:35 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 20:20:22 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 20:49:39 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,25 @@
 
 void	print_moves(t_game *game)
 {
-	char	*string;
-	char	moves[10];
+	char	*temp;
+	char	print_moves[10];
+	char	print_collectables[20];
 
-	string = ft_itoa(game->total_moves);
-	strcpy(moves, "Moves: ");
-	strcat(moves, string);
-	printf("AQUI%s\n", moves);
+	temp = ft_itoa(game->total_moves);
+	strcpy(print_moves, "Moves: ");
+	strcat(print_moves, temp);
+	temp = ft_itoa(game->collected_collectables);
+	strcpy(print_collectables, "Collected: ");
+	strcat(print_collectables, temp);
+	strcat(print_collectables, "/");
+	strcat(print_collectables, ft_itoa(game->total_collectable));
 	mlx_delete_image(game->mlx, game->images->moves_print);
-	game->images->moves_print = mlx_put_string(game->mlx, moves,
-			16, game->height * 64 - 44);
-	free(string);
+	mlx_delete_image(game->mlx, game->images->collected_print);
+	game->images->moves_print = mlx_put_string(game->mlx, print_moves,
+			16, game->height * 64 - 350);
+	game->images->collected_print = mlx_put_string(game->mlx, print_collectables,
+		16, game->height * 64 - 370);
+	free(temp);
 }
 
 t_game	*move_up(t_game	*game)

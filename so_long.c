@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 20:21:04 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 20:48:38 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,16 @@ void	print_map(char **map) //TO DO remove function
 
 void	string_to_screen(t_game *game)
 {
+	char	*temp;
+	char	colected_print[20];
+
+	temp = ft_itoa(game->total_collectable);
+	strcpy(colected_print, "Collected: 0/");
+	strcat(colected_print, temp);
 	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",
-			16, game->height * 64 - 44);
-	// mlx_image_to_window(game->mlx, game->images->collectable,
-	// 	140, game->height * 64 - 50);
-	// mlx_put_string(game->mlx, ":", 160, game->height * 64 - 44);
+			16, game->height * 64 - 350);
+	game->images->collected_print = mlx_put_string(game->mlx, colected_print,
+			16, game->height * 64 - 370);
 }
 
 int	main(int argc, char **argv)
