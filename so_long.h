@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 20:23:45 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 20:54:18 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_image
 	mlx_image_t	*player;
 	mlx_image_t	*collectable;
 	mlx_image_t	*exit;
+	mlx_image_t	*open_exit;
 	mlx_image_t	*yeow;
 	mlx_image_t	*moves_print;
 	mlx_image_t	*collected_print;
@@ -80,6 +81,7 @@ t_image	*load_player_texture(mlx_t *mlx, t_image *image);
 t_image	*load_collectable_texture(mlx_t *mlx, t_image *image);
 t_image	*load_exit_texture(mlx_t *mlx, t_image *image);
 t_image	*load_yeow_texture(mlx_t *mlx, t_image *image);
+t_image	*load_open_exit_texture(mlx_t *mlx, t_image *image);
 
 /*fill_images*/
 void	fill_background(t_game *data);

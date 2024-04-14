@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:36:28 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 12:36:44 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 20:59:09 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ void	look_for_collectable(int height, int width, t_game *game)
 
 void	collected_all_collectable(t_game *game)
 {
+	if (game->collected_collectables == game->total_collectable)
+	{
+		mlx_delete_image(game->mlx, game->images->exit);
+		if (mlx_image_to_window(game->mlx, game->images->open_exit,
+				game->exit_position_y * PIXELS,
+				game->exit_position_x * PIXELS) < 0)
+			error("Failed to put image to window");
+	}
 	if (game->collected_collectables == game->total_collectable
 		&& game->exit_position_x == game->player_position_x
 		&& game->exit_position_y == game->player_position_y)

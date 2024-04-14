@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 10:35:18 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 14:57:47 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/14 20:58:19 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,20 @@ t_image	*load_exit_texture(mlx_t *mlx, t_image *image)
 	if (!image->exit)
 		error("Problem player texture to image");
 	mlx_delete_texture (exit);
+	return (image);
+}
+
+t_image	*load_open_exit_texture(mlx_t *mlx, t_image *image)
+{
+	mlx_texture_t	*open_exit;
+
+	open_exit = mlx_load_png("./images/exit3.png");
+	if (!open_exit)
+		error("Problem loading player image");
+	image->open_exit = mlx_texture_to_image(mlx, open_exit);
+	if (!image->open_exit)
+		error("Problem player texture to image");
+	mlx_delete_texture (open_exit);
 	return (image);
 }
 
