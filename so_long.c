@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/15 13:14:14 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/17 12:33:25 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,16 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	read_map(map, argv[1]);
 	if (!valid_map(map))
-		free_array_and_exit(map);
+		return (free_array(map), EXIT_FAILURE);
 	game = ft_calloc(1, sizeof(t_game));
 	if (game == NULL)
-		return (EXIT_FAILURE);
+		return (free_array(map), EXIT_FAILURE);
 	initialize_game_data(&game, map);
+	if (!valid_path(game))
+		return (free_array(map), free(game), EXIT_FAILURE);
 	game->images = initialize_images_data(game->mlx);
 	fill_background(game);
 	fill_components(game);
-	if (!valid_path(game))
-		printf("path not valid\n");
 	string_to_screen(game);
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);

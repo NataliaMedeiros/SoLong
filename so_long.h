@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 20:54:18 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   so_long.h                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/17 12:45:26 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,8 @@ void	count_collectables(t_game	**game);
 
 /*check_path*/
 bool	valid_path(t_game *game);
+
+void	print_map(char **map); //TO DO remove function
+
 
 #endif
