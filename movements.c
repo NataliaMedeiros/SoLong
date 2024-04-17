@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 14:01:35 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/16 15:30:39 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/17 20:46:48 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,14 @@ void	print_collectables(t_game	*game)
 {
 	char	*temp;
 	char	print_collectables[20];
-
 	temp = ft_itoa(game->collected_collectables);
 	strcpy(print_collectables, "Collected: ");
 	strcat(print_collectables, temp);
+	free(temp);
 	strcat(print_collectables, "/");
-	strcat(print_collectables, ft_itoa(game->total_collectable));
+	temp = ft_itoa(game->total_collectable);
+	strcat(print_collectables, temp);
+	mlx_delete_image(game->mlx, game->images->moves_print);
 	mlx_delete_image(game->mlx, game->images->collected_print);
 	game->images->collected_print = mlx_put_string(game->mlx,
 			print_collectables, 16, game->height * 64 - 370);

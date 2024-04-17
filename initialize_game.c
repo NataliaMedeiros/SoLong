@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 14:48:18 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/16 12:17:56 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/17 20:44:18 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,6 @@ void	initialize_game_data(t_game **game, char **map)
 	(*game)->map = map;
 	(*game)->height = height_map(map);
 	(*game)->width = ft_strlen_nl(map[0]);
-	(*game)->mlx = mlx_init((*game)->width * PIXELS, (*game)->height * PIXELS,
-			"SoLong", true);
-	if (!(*game)->mlx)
-		free_array_and_exit(map);
 	(*game)->total_moves = 0;
 	(*game)->total_collectable = 0;
 	set_player_position(game);
