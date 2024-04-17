@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 14:01:35 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/15 13:15:35 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/17 15:06:25 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,14 @@ void	print_moves(t_game *game)
 	temp = ft_itoa(game->total_moves);
 	strcpy(print_moves, "Moves: ");
 	strcat(print_moves, temp);
+	free(temp);
 	temp = ft_itoa(game->collected_collectables);
 	strcpy(print_collectables, "Collected: ");
 	strcat(print_collectables, temp);
+	free(temp);
 	strcat(print_collectables, "/");
-	strcat(print_collectables, ft_itoa(game->total_collectable));
+	temp = ft_itoa(game->total_collectable);
+	strcat(print_collectables, temp);
 	mlx_delete_image(game->mlx, game->images->moves_print);
 	mlx_delete_image(game->mlx, game->images->collected_print);
 	game->images->moves_print = mlx_put_string(game->mlx, print_moves,

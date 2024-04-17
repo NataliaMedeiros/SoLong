@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/17 12:33:25 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/17 15:13:08 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	string_to_screen(t_game *game)
 			16, game->height * 64 - 350);
 	game->images->collected_print = mlx_put_string(game->mlx, colected_print,
 			16, game->height * 64 - 370);
+	free(temp);
 }
 
 int	main(int argc, char **argv)
@@ -115,12 +116,16 @@ int	main(int argc, char **argv)
 	read_map(map, argv[1]);
 	if (!valid_map(map))
 		return (free_array(map), EXIT_FAILURE);
-	game = ft_calloc(1, sizeof(t_game));
+	game = ft_calloc(1, sizeof(t_game)); //revisar leak the memory here 64 bits
 	if (game == NULL)
 		return (free_array(map), EXIT_FAILURE);
 	initialize_game_data(&game, map);
 	if (!valid_path(game))
 		return (free_array(map), free(game), EXIT_FAILURE);
+	game->mlx = mlx_init((game)->width * PIXELS, (game)->height * PIXELS,
+			"SoLong", true);
+	if (!(game)->mlx)
+		free_array_and_exit(map);
 	game->images = initialize_images_data(game->mlx);
 	fill_background(game);
 	fill_components(game);
@@ -128,4 +133,5 @@ int	main(int argc, char **argv)
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
+	return (free(game->images), free(game), free_array(map), EXIT_FAILURE);
 }

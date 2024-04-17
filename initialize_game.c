@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   initialize_game.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 14:48:18 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 14:54:17 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   initialize_game.c                                  :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/14 14:48:18 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/17 15:12:43 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,6 @@ void	initialize_game_data(t_game **game, char **map)
 	(*game)->map = map;
 	(*game)->height = height_map(map);
 	(*game)->width = ft_strlen_nl(map[0]);
-	(*game)->mlx = mlx_init((*game)->width * PIXELS, (*game)->height * PIXELS,
-			"SoLong", true);
-	if (!(*game)->mlx)
-		free_array_and_exit(map);
 	(*game)->total_moves = 0;
 	(*game)->total_collectable = 0;
 	set_player_position(game);
