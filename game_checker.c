@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 12:36:28 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 20:59:09 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/16 16:09:48 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ void	collected_all_collectable(t_game *game)
 				game->exit_position_y * PIXELS,
 				game->exit_position_x * PIXELS) < 0)
 			error("Failed to put image to window");
-	}
-	if (game->collected_collectables == game->total_collectable
-		&& game->exit_position_x == game->player_position_x
-		&& game->exit_position_y == game->player_position_y)
-	{
-		mlx_close_window(game->mlx);
-		ft_putendl_fd(1, "Congratulations, you won!!!");
+		if (game->exit_position_x == game->player_position_x
+			&& game->exit_position_y == game->player_position_y)
+		{
+			// game->images->winner_message = mlx_put_string(game->mlx, "Congratulations, you won!!!",
+			// 220, game->height * 64 - 250);
+			mlx_close_window(game->mlx);//TODO check if I should close the window when the player win
+			// ft_putendl_fd(1, "Congratulations, you won!!!");
+		}
 	}
 }

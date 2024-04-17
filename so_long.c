@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        ::::::::            */
-/*   so_long.c                                          :+:    :+:            */
-/*                                                     +:+                    */
-/*   By: natalia <natalia@student.42.fr>              +#+                     */
-/*                                                   +#+                      */
-/*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/15 13:14:14 by nmedeiro      ########   odam.nl         */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
+/*   Updated: 2024/04/16 13:39:18 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_image	*initialize_images_data(mlx_t	*mlx)
 	images = load_exit_texture(mlx, images);
 	images = load_open_exit_texture(mlx, images);
 	images = load_yeow_texture(mlx, images); //TODO if don't work delete
+	images = load_walk_player_texture(mlx, images);
 	return (images);
 }
 
@@ -116,14 +117,16 @@ int	main(int argc, char **argv)
 	if (!valid_map(map))
 		free_array_and_exit(map);
 	game = ft_calloc(1, sizeof(t_game));
-	if (game == NULL)
-		return (EXIT_FAILURE);
+	if (!game)
+		return (free_array(map), EXIT_FAILURE);
 	initialize_game_data(&game, map);
+	if (!valid_path(game))
+		return (free_array(map), EXIT_FAILURE);
 	game->images = initialize_images_data(game->mlx);
+	if (!game->images)
+		return (free_array(map), free_node(&game), EXIT_FAILURE);
 	fill_background(game);
 	fill_components(game);
-	if (!valid_path(game))
-		printf("path not valid\n");
 	string_to_screen(game);
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);

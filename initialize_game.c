@@ -6,13 +6,13 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 14:48:18 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 14:54:17 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/16 12:17:56 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_player_position(t_game	**game) //TODO - check if static
+static void	set_player_position(t_game	**game)
 {
 	int	x;
 	int	y;
@@ -35,7 +35,7 @@ void	set_player_position(t_game	**game) //TODO - check if static
 	}
 }
 
-void	set_exit_position(t_game	**game) //TODO - check if static
+static void	set_exit_position(t_game	**game)
 {
 	int	x;
 	int	y;
@@ -58,7 +58,7 @@ void	set_exit_position(t_game	**game) //TODO - check if static
 	}
 }
 
-void	count_collectables(t_game	**game) //TODO - check if static
+static void	count_collectables(t_game	**game)
 {
 	int	x;
 	int	y;

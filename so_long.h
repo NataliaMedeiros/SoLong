@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/14 20:54:18 by natalia          ###   ########.fr       */
+/*   Updated: 2024/04/16 12:17:02 by natalia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,15 @@ typedef struct s_image
 	mlx_image_t	*floor;
 	mlx_image_t	*wall;
 	mlx_image_t	*player;
+	mlx_image_t	*player_right;
+	mlx_image_t	*player_left;
 	mlx_image_t	*collectable;
 	mlx_image_t	*exit;
 	mlx_image_t	*open_exit;
 	mlx_image_t	*yeow;
 	mlx_image_t	*moves_print;
 	mlx_image_t	*collected_print;
+	mlx_image_t	*winner_message;
 }				t_image;
 
 typedef struct s_game
@@ -65,6 +68,7 @@ typedef struct s_vector2D
 void	exit_error(char *error_message);
 int		error(char *error_message);
 int		height_map(char **map);
+void	error_free_and_exit(char *error_message);
 
 /*handle_errors*/
 void	check_map_extention(char *argv);
@@ -73,6 +77,7 @@ bool	valid_map(char **map);
 /*free_utils*/
 void	free_array(char **args);
 void	free_array_and_exit(char **args);
+void	free_node(t_game **game);
 
 /*textures*/
 t_image	*load_floor_texture(mlx_t *mlx, t_image *image);
@@ -82,6 +87,8 @@ t_image	*load_collectable_texture(mlx_t *mlx, t_image *image);
 t_image	*load_exit_texture(mlx_t *mlx, t_image *image);
 t_image	*load_yeow_texture(mlx_t *mlx, t_image *image);
 t_image	*load_open_exit_texture(mlx_t *mlx, t_image *image);
+t_image	*load_walk_player_texture(mlx_t *mlx, t_image *image);
+t_image	*load_player_left_texture(mlx_t *mlx, t_image *image);
 
 /*fill_images*/
 void	fill_background(t_game *data);
@@ -101,11 +108,11 @@ void	look_for_collectable(int height, int width, t_game *game);
 
 /*initialize_game*/
 void	initialize_game_data(t_game **game, char **map);
-void	set_player_position(t_game	**game);
-void	set_exit_position(t_game	**game);
-void	count_collectables(t_game	**game);
 
 /*check_path*/
 bool	valid_path(t_game *game);
+
+/*TODO remove*/
+void	print_map(char **map); //TO DO remove function
 
 #endif
