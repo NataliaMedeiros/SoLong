@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check_path.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 15:00:32 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/17 20:55:45 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   check_path.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/14 15:00:32 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 13:50:49 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ bool	surroded_by_wall(char	**map, int x, int y)
 
 bool	flood_fill(t_game *temp, int x, int y)
 {
-	if (temp->map[x][y] == '1' || temp->map[x][y] == 'E')
-	{
-		if (temp->map[x][y] == 'E')
-			temp->exit_position_x = 1;
+	if (temp->map[x][y] == '1')
 		return (false);
-	}
+	if (temp->map[x][y] == 'E')
+		temp->exit_position_x = 1;
 	if (temp->map[x][y] == 'C')
 		temp->collected_collectables += 1;
 	temp->map[x][y] = '1';
