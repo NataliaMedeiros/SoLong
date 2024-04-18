@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 14:25:47 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 15:05:18 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,9 @@ t_image	*load_walk_player_texture(mlx_t *mlx, t_image *image);
 t_image	*load_player_left_texture(mlx_t *mlx, t_image *image);
 
 /*fill_images*/
-void	fill_images(t_game *game);
-void	fill_background(t_game *data);
-void	fill_components(t_game	*game);
+void	fill_background_and_component(t_game *data);
 void	load_component_images(t_game *game, int width, int height);
+void	string_to_screen(t_game *game);
 
 /*movements*/
 t_game	*move_up(t_game	*game);

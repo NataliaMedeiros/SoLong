@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   game_checker.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 12:36:28 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/17 20:43:55 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   game_checker.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/14 12:36:28 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 15:12:36 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,10 @@ void	collected_all_collectable(t_game *game)
 				game->exit_position_y * PIXELS,
 				game->exit_position_x * PIXELS) < 0)
 			error("Failed to put image to window");
-		if (game->exit_position_x == game->player_position_x
-			&& game->exit_position_y == game->player_position_y)
+		if (game->exit_position_y == game->player_position_y
+			&& game->exit_position_x == game->player_position_x)
 		{
-			// game->images->winner_message = mlx_put_string(game->mlx, "Congratulations, you won!!!",
-			// 220, game->height * 64 - 250);
-			mlx_close_window(game->mlx);//TODO check if I should close the window when the player win
-			// ft_putendl_fd(1, "Congratulations, you won!!!");
+			mlx_close_window(game->mlx);
 		}
 	}
 }

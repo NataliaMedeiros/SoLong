@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 13:56:45 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 14:27:05 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 15:04:44 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,26 @@ void	fill_players_images(t_game *game)
 	game->images->player_left->instances->enabled = false;
 }
 
-void	fill_components(t_game	*game)
-{
-	int		width;
-	int		height;
+// void	fill_components(t_game	*game)
+// {
+// 	int		width;
+// 	int		height;
 
-	height = 0;
-	while (height < game->height)
-	{
-		width = 0;
-		while (width < game->width)
-		{
-			load_component_images(game, width, height);
-			width++;
-		}
-		height++;
-	}
-	fill_players_images(game);
-}
+// 	height = 0;
+// 	while (height < game->height)
+// 	{
+// 		width = 0;
+// 		while (width < game->width)
+// 		{
+// 			load_component_images(game, width, height);
+// 			width++;
+// 		}
+// 		height++;
+// 	}
+// 	fill_players_images(game);
+// }
 
-void	fill_background(t_game *data)
+void	fill_background_and_component(t_game *data)
 {
 	int		width;
 	int		height;
@@ -88,10 +88,27 @@ void	fill_background(t_game *data)
 			if (mlx_image_to_window(data->mlx, data->images->floor,
 					width * PIXELS, height * PIXELS) < 0)
 				error("Failed to put image to window");
+			load_component_images(data, width, height);
 			width++;
 		}
 		height++;
 	}
+	fill_players_images(data);
+}
+
+void	string_to_screen(t_game *game)
+{
+	char	*temp;
+	char	colected_print[20];
+
+	temp = ft_itoa(game->total_collectable);
+	strcpy(colected_print, "Collected: 0/");
+	strcat(colected_print, temp);
+	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",
+			16, game->height * 64 - 350);
+	game->images->collected_print = mlx_put_string(game->mlx, colected_print,
+			16, game->height * 64 - 370);
+	free(temp);
 }
 
 // void	fill_images(t_game *game)

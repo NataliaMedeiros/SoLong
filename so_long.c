@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 14:30:35 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 15:05:28 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,6 @@ void	print_map(char **map) //TO DO remove function
 	}
 }
 
-void	string_to_screen(t_game *game)
-{
-	char	*temp;
-	char	colected_print[20];
-
-	temp = ft_itoa(game->total_collectable);
-	strcpy(colected_print, "Collected: 0/");
-	strcat(colected_print, temp);
-	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",
-			16, game->height * 64 - 350);
-	game->images->collected_print = mlx_put_string(game->mlx, colected_print,
-			16, game->height * 64 - 370);
-	free(temp);
-}
-
 int	main(int argc, char **argv)
 {
 	char	**map;
@@ -118,7 +103,7 @@ int	main(int argc, char **argv)
 	read_map(map, argv[1]);
 	if (!valid_map(map))
 		return (free_array(map), EXIT_FAILURE);
-	game = ft_calloc(1, sizeof(t_game)); //revisar leak the memory here 64 bits
+	game = ft_calloc(1, sizeof(t_game));
 	if (game == NULL)
 		return (free_array(map), EXIT_FAILURE);
 	initialize_game_data(&game, map);
@@ -131,8 +116,8 @@ int	main(int argc, char **argv)
 	game->images = initialize_images_data(game->mlx);
 	if (!game->images)
 		return (free_array(map), free_node(&game), EXIT_FAILURE);
-	fill_background(game);
-	fill_components(game);
+	fill_background_and_component(game);
+	// fill_components(game);
 	string_to_screen(game);
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);
