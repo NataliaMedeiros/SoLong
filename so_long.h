@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 15:05:18 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 20:03:32 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_image
 	mlx_image_t	*player;
 	mlx_image_t	*player_right;
 	mlx_image_t	*player_left;
+	mlx_image_t	*player_dead;
+	mlx_image_t	*enemy;
 	mlx_image_t	*collectable;
 	mlx_image_t	*exit;
 	mlx_image_t	*open_exit;
@@ -92,6 +94,8 @@ t_image	*load_yeow_texture(mlx_t *mlx, t_image *image);
 t_image	*load_open_exit_texture(mlx_t *mlx, t_image *image);
 t_image	*load_walk_player_texture(mlx_t *mlx, t_image *image);
 t_image	*load_player_left_texture(mlx_t *mlx, t_image *image);
+t_image	*load_enemy_texture(mlx_t *mlx, t_image *image);
+t_image	*load_player_dead_texture(mlx_t *mlx, t_image *image);
 
 /*fill_images*/
 void	fill_background_and_component(t_game *data);
@@ -108,6 +112,7 @@ void	ft_hook_moves(mlx_key_data_t key_data, void *mlx);
 /*game_checker*/
 void	collected_all_collectable(t_game *game);
 void	look_for_collectable(int height, int width, t_game *game);
+bool	hit_on_enemy(t_game *game, int height, int width);
 
 /*initialize_game*/
 void	initialize_game_data(t_game **game, char **map);

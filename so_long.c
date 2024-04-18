@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 15:05:28 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 19:56:38 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ t_image	*initialize_images_data(mlx_t	*mlx)
 	images = load_yeow_texture(mlx, images); //TODO if don't work delete
 	images = load_walk_player_texture(mlx, images);
 	images = load_player_left_texture(mlx, images);
+	images = load_enemy_texture(mlx, images);
+	images = load_player_dead_texture(mlx, images);
 	return (images);
 }
 

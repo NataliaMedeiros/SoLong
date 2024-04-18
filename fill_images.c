@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 13:56:45 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 15:04:44 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 19:57:14 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	load_component_images(t_game *game, int width, int height)
 				width * PIXELS, height * PIXELS) < 0)
 			error("Failed to put image to window");
 	}
+	else if (game->map[height][width] == 'D')
+	{
+		if (mlx_image_to_window(game->mlx, game->images->enemy,
+				width * PIXELS, height * PIXELS) < 0)
+			error("Failed to put image to window");
+	}
 }
 
 void	fill_players_images(t_game *game)
@@ -52,6 +58,10 @@ void	fill_players_images(t_game *game)
 			width * PIXELS, height * PIXELS) < 0)
 		error("Failed to put image to window");
 	game->images->player_left->instances->enabled = false;
+	if (mlx_image_to_window(game->mlx, game->images->player_dead,
+			width * PIXELS, height * PIXELS) < 0)
+		error("Failed to put image to window");
+	game->images->player_dead->instances->enabled = false;
 }
 
 // void	fill_components(t_game	*game)

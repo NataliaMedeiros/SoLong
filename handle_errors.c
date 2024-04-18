@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 11:35:17 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/12 21:24:44 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   handle_errors.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/09 11:35:17 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 19:48:40 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	valid_wall_and_components(char **map)
 					|| j == ft_strlen_nl(map[i]) - 1) && map[i][j] != '1')
 				return (error("Invalid wall"), false);
 			else if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'P'
-				&& map[i][j] != 'E' && map[i][j] != 'C')
+				&& map[i][j] != 'E' && map[i][j] != 'C' && map[i][j] != 'D')
 				return (error("invalid component"), false);
 			j++;
 		}

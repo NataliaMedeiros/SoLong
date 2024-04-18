@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 10:35:18 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 12:30:32 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 20:25:29 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,25 @@ t_image	*load_player_left_texture(mlx_t *mlx, t_image *image)
 	return (image);
 }
 
+t_image	*load_player_dead_texture(mlx_t *mlx, t_image *image)
+{
+	mlx_texture_t	*player_dead;
+
+	player_dead = mlx_load_png("./images/player_dead2.png");
+	if (!player_dead)
+		exit_error("Problem loading player image");
+	image->player_dead = mlx_texture_to_image(mlx, player_dead);
+	if (!image->player_dead)
+		exit_error("Problem player texture to image");
+	mlx_delete_texture (player_dead);
+	return (image);
+}
+
 t_image	*load_collectable_texture(mlx_t *mlx, t_image *image)
 {
 	mlx_texture_t	*collectable;
 
-	collectable = mlx_load_png("./images/collectable.png");
+	collectable = mlx_load_png("./images/chest.png");
 	if (!collectable)
 		exit_error("Problem loading player image");
 	image->collectable = mlx_texture_to_image(mlx, collectable);
@@ -121,6 +135,20 @@ t_image	*load_open_exit_texture(mlx_t *mlx, t_image *image)
 	if (!image->open_exit)
 		exit_error("Problem player texture to image");
 	mlx_delete_texture (open_exit);
+	return (image);
+}
+
+t_image	*load_enemy_texture(mlx_t *mlx, t_image *image)
+{
+	mlx_texture_t	*enemy;
+
+	enemy = mlx_load_png("./images/dino_iddle.png");
+	if (!enemy)
+		exit_error("Problem loading player image");
+	image->enemy = mlx_texture_to_image(mlx, enemy);
+	if (!image->enemy)
+		exit_error("Problem player texture to image");
+	mlx_delete_texture (enemy);
 	return (image);
 }
 

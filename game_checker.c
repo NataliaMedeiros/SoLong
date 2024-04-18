@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 12:36:28 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 15:12:36 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 20:26:52 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,17 @@ void	look_for_collectable(int height, int width, t_game *game)
 			i++;
 		}
 	}
+}
+
+bool	hit_on_enemy(t_game *game, int height, int width)
+{
+	if (game->map[height][width] == 'D')
+	{
+		mlx_put_string(game->mlx, "GAME OVER",
+			(game->width * PIXELS - 40) / 2, (game->height * PIXELS - 5) / 2);
+		return (true);
+	}
+	return (false);
 }
 
 void	collected_all_collectable(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 14:01:35 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 13:48:27 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 20:22:42 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ t_game	*move_up(t_game	*game)
 		game->images->player_left->instances[0].y -= PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
+		if (!hit_on_enemy(game, game->player_position_x,
+			game->player_position_y))
+			game->images->player_dead->instances[0].y -= PIXELS;
+		else
+		{
+			disable_image(game);
+			game->images->player_dead->instances->enabled = true;
+			// sleep(10);
+			// mlx_close_window(game->mlx);
+		}
 		printf("moves: %d\n", game->total_moves);
 	}
 	else
@@ -55,6 +65,16 @@ t_game	*move_down(t_game	*game)
 		game->images->player_left->instances[0].y += PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
+		if (!hit_on_enemy(game, game->player_position_x,
+				game->player_position_y))
+			game->images->player_dead->instances[0].y += PIXELS;
+		else
+		{
+			disable_image(game);
+			game->images->player_dead->instances->enabled = true;
+			// sleep(10);
+			// mlx_close_window(game->mlx);
+		}
 		printf("moves: %d\n", game->total_moves);
 	}
 	else
@@ -77,6 +97,16 @@ t_game	*move_right(t_game	*game)
 		game->images->player_left->instances[0].x += PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
+		if (!hit_on_enemy(game, game->player_position_x,
+				game->player_position_y))
+			game->images->player_dead->instances[0].x += PIXELS;
+		else
+		{
+			disable_image(game);
+			game->images->player_dead->instances->enabled = true;
+			// sleep(10);
+			// mlx_close_window(game->mlx);
+		}
 		printf("moves: %d\n", game->total_moves);
 	}
 	else
@@ -97,6 +127,16 @@ t_game	*move_left(t_game	*game)
 		game->images->player_left->instances[0].x -= PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
+		if (!hit_on_enemy(game, game->player_position_x,
+				game->player_position_y))
+			game->images->player_dead->instances[0].x -= PIXELS;
+		else
+		{
+			disable_image(game);
+			game->images->player_dead->instances->enabled = true;
+			// sleep(10);
+			// mlx_close_window(game->mlx);
+		}
 		printf("moves: %d\n", game->total_moves);
 	}
 	return (game);
@@ -109,18 +149,20 @@ void	ft_hook_moves(mlx_key_data_t key_data, void *mlx)
 	game = (t_game *)mlx;
 	if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
 		mlx_close_window(game->mlx);
-	if ((key_data.key == MLX_KEY_UP || key_data.key == MLX_KEY_W )
-		&& key_data.action == MLX_PRESS)
-		move_up(game);
-	if ((key_data.key == MLX_KEY_DOWN || key_data.key == MLX_KEY_S )
-		&& key_data.action == MLX_PRESS)
-		move_down(game);
-	if ((key_data.key == MLX_KEY_RIGHT || key_data.key == MLX_KEY_D )
-		&& key_data.action == MLX_PRESS)
-		move_right(game);
-	if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A )
-		&& key_data.action == MLX_PRESS)
-		move_left(game);
+	if (!game->images->player_dead->instances->enabled) {
+		if ((key_data.key == MLX_KEY_UP || key_data.key == MLX_KEY_W )
+			&& key_data.action == MLX_PRESS)
+			move_up(game);
+		if ((key_data.key == MLX_KEY_DOWN || key_data.key == MLX_KEY_S )
+			&& key_data.action == MLX_PRESS)
+			move_down(game);
+		if ((key_data.key == MLX_KEY_RIGHT || key_data.key == MLX_KEY_D )
+			&& key_data.action == MLX_PRESS)
+			move_right(game);
+		if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A )
+			&& key_data.action == MLX_PRESS)
+			move_left(game);
+	}
 	print_moves(game);
 	print_collectables(game);
 	collected_all_collectable(game);
