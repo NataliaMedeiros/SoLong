@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 13:56:45 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 13:57:05 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 14:27:05 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	load_component_images(t_game *game, int width, int height)
 	}
 }
 
-void	load_players_images(t_game *game)
+void	fill_players_images(t_game *game)
 {
 	int	width;
 	int	height;
@@ -52,6 +52,25 @@ void	load_players_images(t_game *game)
 			width * PIXELS, height * PIXELS) < 0)
 		error("Failed to put image to window");
 	game->images->player_left->instances->enabled = false;
+}
+
+void	fill_components(t_game	*game)
+{
+	int		width;
+	int		height;
+
+	height = 0;
+	while (height < game->height)
+	{
+		width = 0;
+		while (width < game->width)
+		{
+			load_component_images(game, width, height);
+			width++;
+		}
+		height++;
+	}
+	fill_players_images(game);
 }
 
 void	fill_background(t_game *data)
@@ -75,21 +94,9 @@ void	fill_background(t_game *data)
 	}
 }
 
-void	fill_components(t_game	*game)
-{
-	int		width;
-	int		height;
-
-	height = 0;
-	while (height < game->height)
-	{
-		width = 0;
-		while (width < game->width)
-		{
-			load_component_images(game, width, height);
-			width++;
-		}
-		height++;
-	}
-	load_players_images(game);
-}
+// void	fill_images(t_game *game)
+// {
+// 	fill_background(game);
+// 	fill_components(game);
+// 	fill_players_images(game);
+// }

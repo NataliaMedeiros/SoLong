@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 12:35:19 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 14:25:47 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	error_free_and_exit(char *error_message);
 void	check_map_extention(char *argv);
 bool	valid_map(char **map);
 
+/*check_path*/
+bool	valid_path(t_game *game);
+
 /*free_utils*/
 void	free_array(char **args);
 void	free_array_and_exit(char **args);
@@ -91,6 +94,7 @@ t_image	*load_walk_player_texture(mlx_t *mlx, t_image *image);
 t_image	*load_player_left_texture(mlx_t *mlx, t_image *image);
 
 /*fill_images*/
+void	fill_images(t_game *game);
 void	fill_background(t_game *data);
 void	fill_components(t_game	*game);
 void	load_component_images(t_game *game, int width, int height);
@@ -109,13 +113,12 @@ void	look_for_collectable(int height, int width, t_game *game);
 /*initialize_game*/
 void	initialize_game_data(t_game **game, char **map);
 
-/*check_path*/
-bool	valid_path(t_game *game);
 
 /*TODO remove*/
 void	print_map(char **map); //TO DO remove function
 
 /*print_on_screen*/
 void	print_moves(t_game *game);
+void	print_collectables(t_game	*game);
 
 #endif
