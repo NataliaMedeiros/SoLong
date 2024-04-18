@@ -6,13 +6,13 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 15:00:32 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 13:50:49 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/18 14:02:22 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-bool	surroded_by_wall(char	**map, int x, int y)
+static bool	surroded_by_wall(char	**map, int x, int y)
 {
 	if (map[x + 1][y] == '1'
 		&& map[x - 1][y] == '1'
@@ -22,7 +22,7 @@ bool	surroded_by_wall(char	**map, int x, int y)
 	return (false);
 }
 
-bool	flood_fill(t_game *temp, int x, int y)
+static bool	flood_fill(t_game *temp, int x, int y)
 {
 	if (temp->map[x][y] == '1')
 		return (false);
