@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 10:35:18 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/16 12:16:32 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   textures.c                                         :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/12 10:35:18 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 12:30:32 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,15 @@ t_image	*load_player_texture(mlx_t *mlx, t_image *image)
 
 t_image	*load_walk_player_texture(mlx_t *mlx, t_image *image)
 {
-	mlx_texture_t	*walk_player;
+	mlx_texture_t	*player_right;
 
-	walk_player = mlx_load_png("./images/walk_player.png");
-	if (!walk_player)
-		exit_error("Problem loading player image");
-	image->player_right = mlx_texture_to_image(mlx, walk_player);
+	player_right = mlx_load_png("./images/player_right.png");
+	if (!player_right)
+		exit_error("Problem loading player right image");
+	image->player_right = mlx_texture_to_image(mlx, player_right);
 	if (!image->player_right)
 		exit_error("Problem player texture to image");
-	mlx_delete_texture (walk_player);
-	image->player_right->enabled = false;
+	mlx_delete_texture (player_right);
 	return (image);
 }
 
@@ -73,14 +72,13 @@ t_image	*load_player_left_texture(mlx_t *mlx, t_image *image)
 {
 	mlx_texture_t	*player_left;
 
-	player_left = mlx_load_png("./images/walk_player.png");
+	player_left = mlx_load_png("./images/player_left.png");
 	if (!player_left)
 		exit_error("Problem loading player image");
 	image->player_left = mlx_texture_to_image(mlx, player_left);
 	if (!image->player_left)
 		exit_error("Problem player texture to image");
 	mlx_delete_texture (player_left);
-	image->player_left->enabled = false;
 	return (image);
 }
 

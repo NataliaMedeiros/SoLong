@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   movements.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 14:01:35 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/17 21:05:20 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   movements.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/12 14:01:35 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 12:32:56 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,22 @@
 void	print_moves(t_game *game)
 {
 	char	*temp;
-	char	print_moves[10];
-	char	print_collectables[20];
+	char	print_moves[20];
 
 	temp = ft_itoa(game->total_moves);
 	strcpy(print_moves, "Moves: ");
 	strcat(print_moves, temp);
-	free(temp);
-	temp = ft_itoa(game->collected_collectables);
-	strcpy(print_collectables, "Collected: ");
-	strcat(print_collectables, temp);
-	free(temp);
-	strcat(print_collectables, "/");
-	temp = ft_itoa(game->total_collectable);
-	strcat(print_collectables, temp);
 	mlx_delete_image(game->mlx, game->images->moves_print);
-	mlx_delete_image(game->mlx, game->images->collected_print);
 	game->images->moves_print = mlx_put_string(game->mlx, print_moves,
 			16, game->height * 64 - 350);
-	game->images->collected_print = mlx_put_string(game->mlx, print_collectables,
-		16, game->height * 64 - 370);
 	free(temp);
 }
-
-// void	print_moves(t_game *game)
-// {
-// 	char	*temp;
-// 	char	print_moves[20];
-
-// 	temp = ft_itoa(game->total_moves);
-// 	strcpy(print_moves, "Moves: ");
-// 	strcat(print_moves, temp);
-// 	free(temp);
-// 	mlx_delete_image(game->mlx, game->images->moves_print);
-// 	game->images->moves_print = mlx_put_string(game->mlx, print_moves,
-// 			16, game->height * 64 - 350);
-// }
 
 void	print_collectables(t_game	*game)
 {
 	char	*temp;
 	char	print_collectables[20];
+
 	temp = ft_itoa(game->collected_collectables);
 	strcpy(print_collectables, "Collected: ");
 	strcat(print_collectables, temp);
@@ -63,20 +38,33 @@ void	print_collectables(t_game	*game)
 	strcat(print_collectables, "/");
 	temp = ft_itoa(game->total_collectable);
 	strcat(print_collectables, temp);
-	mlx_delete_image(game->mlx, game->images->moves_print);
 	mlx_delete_image(game->mlx, game->images->collected_print);
 	game->images->collected_print = mlx_put_string(game->mlx,
 			print_collectables, 16, game->height * 64 - 370);
 	free(temp);
 }
 
+void	disable_image(t_game *game)
+{
+	if (game->images->player->instances->enabled == true)
+		game->images->player->instances->enabled = false;
+	if (game->images->player_right->instances->enabled == true)
+		game->images->player_right->instances->enabled = false;
+	if (game->images->player_left->instances->enabled == true)
+		game->images->player_left->instances->enabled = false;
+}
+
 t_game	*move_up(t_game	*game)
 {
 	if (game->map[game->player_position_x - 1][game->player_position_y] != '1')
 	{
-		game->images->player->instances[0].y -= PIXELS;
 		game->player_position_x--;
 		game->total_moves++;
+		disable_image(game);
+		game->images->player->instances->enabled = true;
+		game->images->player->instances[0].y -= PIXELS;
+		game->images->player_right->instances[0].y -= PIXELS;
+		game->images->player_left->instances[0].y -= PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 		printf("moves: %d\n", game->total_moves);
@@ -90,9 +78,13 @@ t_game	*move_down(t_game	*game)
 {
 	if (game->map[game->player_position_x + 1][game->player_position_y] != '1')
 	{
-		game->images->player->instances[0].y += PIXELS;
 		game->player_position_x++;
 		game->total_moves++;
+		disable_image(game);
+		game->images->player->instances->enabled = true;
+		game->images->player->instances[0].y += PIXELS;
+		game->images->player_right->instances[0].y += PIXELS;
+		game->images->player_left->instances[0].y += PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 		printf("moves: %d\n", game->total_moves);
@@ -104,35 +96,17 @@ t_game	*move_down(t_game	*game)
 	return (game);
 }
 
-static void	change_direction(t_game *game, char c, int x, int y)
-{
-	// if (c == 'u')
-	// 	mlx_image_to_window(game->mlx, game->img->player_up, \
-	// 	x * PIXELS, y * PIXELS);
-	// if (c == 'd')
-	// 	mlx_image_to_window(game->mlx, game->img->player_down, \
-	// 	x * PIXELS, y * PIXELS);
-	// if (c == 'l')
-	// 	mlx_image_to_window(game->mlx, game->img->player_left, \
-	// 	x * PIXELS, y * PIXELS);
-	if (c == 'r')
-	{
-		// if (a == 'p')
-		// 	mlx_delete_image(game->mlx, game->images->player);
-		if (mlx_image_to_window(game->mlx, game->images->player_right,
-			x * PIXELS, y * PIXELS) < 0 )
-			error("Failed to put image to window");
-	}
-}
-
 t_game	*move_right(t_game	*game)
 {
 	if (game->map[game->player_position_x][game->player_position_y + 1] != '1')
 	{
 		game->player_position_y++;
 		game->total_moves++;
-		change_direction(game, 'r', game->player_position_x, game->player_position_y);
+		disable_image(game);
+		game->images->player_right->instances->enabled = true;
 		game->images->player->instances[0].x += PIXELS;
+		game->images->player_right->instances[0].x += PIXELS;
+		game->images->player_left->instances[0].x += PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 		printf("moves: %d\n", game->total_moves);
@@ -146,9 +120,13 @@ t_game	*move_left(t_game	*game)
 {
 	if (game->map[game->player_position_x][game->player_position_y - 1] != '1')
 	{
-		game->images->player->instances[0].x -= PIXELS;
 		game->player_position_y--;
 		game->total_moves++;
+		disable_image(game);
+		game->images->player_left->instances->enabled = true;
+		game->images->player->instances[0].x -= PIXELS;
+		game->images->player_right->instances[0].x -= PIXELS;
+		game->images->player_left->instances[0].x -= PIXELS;
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 		printf("moves: %d\n", game->total_moves);
@@ -158,26 +136,11 @@ t_game	*move_left(t_game	*game)
 	return (game);
 }
 
-// void	load_player(t_game *game, mlx_image_t	*player)
-// {
-// 	if (game->images->player->enabled)
-// 		mlx_delete_image(game->mlx, game->images->player);
-// 	if (!player->enabled)
-// 	{
-// 		player->enabled = true;
-// 		if (mlx_image_to_window(game->mlx, player,
-// 				game->player_position_y * PIXELS,
-// 				game->player_position_x * PIXELS) < 0)
-// 			error("Failed to put image to window");
-// 	}
-// }
-
 void	ft_hook_moves(mlx_key_data_t key_data, void *mlx)
 {
 	t_game	*game;
 
 	game = (t_game *)mlx;
-	//game->images->player->instances[0].enabled = false;
 	if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
 		mlx_close_window(game->mlx);
 	if ((key_data.key == MLX_KEY_UP || key_data.key == MLX_KEY_W )

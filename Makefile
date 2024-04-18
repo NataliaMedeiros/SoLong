@@ -13,6 +13,7 @@ FILES = so_long.c \
 		game_checker.c \
 		initialize_game.c \
 		check_path.c \
+		print_on_screen.c \
 
 #BONUS_FILES =
 

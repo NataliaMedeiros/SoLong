@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 10:52:29 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/17 20:55:29 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   so_long.h                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 12:35:19 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,8 @@ bool	valid_path(t_game *game);
 
 /*TODO remove*/
 void	print_map(char **map); //TO DO remove function
+
+/*print_on_screen*/
+void	print_moves(t_game *game);
 
 #endif

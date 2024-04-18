@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   fill_images.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 13:56:45 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/16 13:39:14 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   fill_images.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/12 13:56:45 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 12:37:30 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ void	load_component_images(t_game *game, int width, int height)
 		if (mlx_image_to_window(game->mlx, game->images->player,
 				width * PIXELS, height * PIXELS) < 0)
 			error("Failed to put image to window");
+		if (mlx_image_to_window(game->mlx, game->images->player_right,
+			width * PIXELS, height * PIXELS) < 0)
+			error("Failed to put image to window");
+		game->images->player_right->instances->enabled = false;
+		if (mlx_image_to_window(game->mlx, game->images->player_left,
+			width * PIXELS, height * PIXELS) < 0)
+			error("Failed to put image to window");
+		game->images->player_left->instances->enabled = false;
 	}
 	else if (game->map[height][width] == 'C')
 	{

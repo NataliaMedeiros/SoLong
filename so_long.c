@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: natalia <natalia@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/09 10:52:38 by natalia           #+#    #+#             */
-/*   Updated: 2024/04/17 20:54:05 by natalia          ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   so_long.c                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: natalia <natalia@student.42.fr>              +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/18 12:31:12 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_image	*initialize_images_data(mlx_t	*mlx)
 	images = load_open_exit_texture(mlx, images);
 	images = load_yeow_texture(mlx, images); //TODO if don't work delete
 	images = load_walk_player_texture(mlx, images);
+	images = load_player_left_texture(mlx, images);
 	return (images);
 }
 
