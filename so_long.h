@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 15:13:40 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 17:33:03 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ typedef struct s_image
 	mlx_image_t	*collectable;
 	mlx_image_t	*exit;
 	mlx_image_t	*open_exit;
-	mlx_image_t	*yeow;
 	mlx_image_t	*moves_print;
 	mlx_image_t	*collected_print;
 	mlx_image_t	*winner_message;
@@ -76,8 +75,10 @@ int		error(char *error_message);
 bool	check_map_extention(char *argv);
 bool	valid_map(char **map);
 
-/*fill_images*/
-void	fill_background_and_component(t_game *data);
+/*images*/
+void	put_images_on_window(t_game *data);
+t_image	*initialize_images(mlx_t	*mlx);
+
 
 /*free_utils*/
 void	free_array(char **args);

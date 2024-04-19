@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 14:48:18 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 16:10:13 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 17:36:02 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,11 @@ t_game	*initialize_game_data(char **map)
 	game = ft_calloc(1, sizeof(t_game));
 	if (game == NULL)
 		return (NULL);
-	(game)->map = map;
-	(game)->height = height_map(map);
-	(game)->width = ft_strlen_nl(map[0]);
-	(game)->total_moves = 0;
-	(game)->total_collectable = 0;
+	game->map = map;
+	game->height = height_map(map);
+	game->width = ft_strlen_nl(map[0]);
+	game->total_moves = 0;
+	game->total_collectable = 0;
 	set_player_position(&game);
 	set_exit_position(&game);
 	count_collectables(&game);

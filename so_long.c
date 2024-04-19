@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 15:11:39 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 17:31:02 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	read_map(char **map, const char *argv)
 	close(fd);
 }
 
-static t_image	*initialize_images_data(mlx_t	*mlx)
+static t_image	*initialize_images(mlx_t	*mlx)
 {
 	t_image	*images;
 
@@ -72,10 +72,10 @@ int	main(int argc, char **argv)
 			"SoLong", false);
 	if (!(game)->mlx)
 		return (free_array(map), free(game), EXIT_FAILURE);
-	game->images = initialize_images_data(game->mlx);
+	game->images = initialize_images(game->mlx);
 	if (!game->images)
 		return (free_array(map), free_node(&game), EXIT_FAILURE);
-	fill_background_and_component(game);
+	put_images_on_window(game);
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);

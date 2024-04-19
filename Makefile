@@ -9,7 +9,7 @@ FILES = so_long.c \
 		error_utils.c \
 		textures.c \
 		textures_character.c \
-		fill_images.c \
+		images.c \
 		movements.c \
 		game_checker.c \
 		initialize_game_data.c \

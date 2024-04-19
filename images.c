@@ -6,11 +6,31 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 13:56:45 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 15:07:18 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 17:33:17 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+t_image	*initialize_images(mlx_t	*mlx)
+{
+	t_image	*images;
+
+	images = ft_calloc(1, sizeof(t_image));
+	if (!images)
+		return (NULL);
+	images = load_floor_texture(mlx, images);
+	images = load_wall_texture(mlx, images);
+	images = load_player_texture(mlx, images);
+	images = load_collectable_texture(mlx, images);
+	images = load_exit_texture(mlx, images);
+	images = load_player_right_texture(mlx, images);
+	images = load_player_left_texture(mlx, images);
+	images = load_enemy_texture(mlx, images);
+	images = load_player_dead_texture(mlx, images);
+	images = load_game_over_texture(mlx, images);
+	return (images);
+}
 
 static void	load_component_images(t_game *game, int width, int height)
 {
@@ -64,7 +84,7 @@ static void	fill_players_images(t_game *game)
 	game->images->player_dead->instances->enabled = false;
 }
 
-void	fill_background_and_component(t_game *data)
+void	put_images_on_window(t_game *data)
 {
 	int		width;
 	int		height;
