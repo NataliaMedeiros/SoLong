@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 14:48:18 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 15:13:47 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 16:10:13 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ t_game	*initialize_game_data(char **map)
 	set_exit_position(&game);
 	count_collectables(&game);
 	if (!valid_path(game))
-		return (free_array(game->map), free(game), NULL);
+		return (free(game), NULL);
 	return (game);
 }

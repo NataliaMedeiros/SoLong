@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/18 12:34:13 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2024/04/19 15:02:46 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 16:06:00 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	string_to_screen(t_game *game)
 	ft_strcpy(colected_print, "Collected: 0/");
 	ft_strcat(colected_print, temp);
 	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",
-			16, game->height * 64 - 350);
+			16, 16);
 	game->images->collected_print = mlx_put_string(game->mlx, colected_print,
-			16, game->height * 64 - 370);
+			16, 36);
 	free(temp);
 }
 
@@ -38,7 +38,7 @@ void	print_moves(t_game *game)
 	ft_strcat(print_moves, temp);
 	mlx_delete_image(game->mlx, game->images->moves_print);
 	game->images->moves_print = mlx_put_string(game->mlx, print_moves,
-			16, game->height * 64 - 350);
+			16, 16);
 	free(temp);
 }
 
@@ -56,6 +56,6 @@ void	print_collectables(t_game	*game)
 	ft_strcat(print_collectables, temp);
 	mlx_delete_image(game->mlx, game->images->collected_print);
 	game->images->collected_print = mlx_put_string(game->mlx,
-			print_collectables, 16, game->height * 64 - 370);
+			print_collectables, 16, 36);
 	free(temp);
 }

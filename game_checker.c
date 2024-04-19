@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 12:36:28 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 14:26:44 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 16:22:51 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	hit_on_enemy(t_game *game, int height, int width)
 	if (game->map[height][width] == 'D')
 	{
 		if (mlx_image_to_window(game->mlx, game->images->game_over,
-				(width * PIXELS - 64) / 2, (height * PIXELS + 64) / 2) < 0)
+				(width * PIXELS + 296) / 2, (height * PIXELS + 140) / 2) < 0)
 			error("Failed to put image to window");
 		return (true);
 	}

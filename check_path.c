@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 15:00:32 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 12:58:20 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 16:09:51 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static bool	surroded_by_wall(char	**map, int x, int y)
 static bool	flood_fill(t_game *temp, int x, int y)
 {
 	if (temp->map[x][y] == '1')
+		return (false);
+	if (temp->map[x][y] == 'D')
 		return (false);
 	if (temp->map[x][y] == 'E')
 		temp->exit_position_x = 1;
