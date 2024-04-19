@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 10:35:18 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 14:17:23 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 15:58:53 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_image	*load_game_over_texture(mlx_t *mlx, t_image *image)
 {
 	mlx_texture_t	*enemy;
 
-	enemy = mlx_load_png("./images/game_over.png");
+	enemy = mlx_load_png("./images/game_over2.png");
 	if (!enemy)
 		exit_error("Problem loading game over image");
 	image->game_over = mlx_texture_to_image(mlx, enemy);
