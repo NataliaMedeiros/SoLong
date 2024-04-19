@@ -6,23 +6,13 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 14:01:35 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 20:22:42 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 15:10:29 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	disable_image(t_game *game)
-{
-	if (game->images->player->instances->enabled == true)
-		game->images->player->instances->enabled = false;
-	if (game->images->player_right->instances->enabled == true)
-		game->images->player_right->instances->enabled = false;
-	if (game->images->player_left->instances->enabled == true)
-		game->images->player_left->instances->enabled = false;
-}
-
-t_game	*move_up(t_game	*game)
+static t_game	*move_up(t_game	*game)
 {
 	if (game->map[game->player_position_x - 1][game->player_position_y] != '1')
 	{
@@ -36,23 +26,19 @@ t_game	*move_up(t_game	*game)
 		look_for_collectable(game->player_position_x,
 			game->player_position_y, game);
 		if (!hit_on_enemy(game, game->player_position_x,
-			game->player_position_y))
+				game->player_position_y))
 			game->images->player_dead->instances[0].y -= PIXELS;
 		else
 		{
 			disable_image(game);
 			game->images->player_dead->instances->enabled = true;
-			// sleep(10);
-			// mlx_close_window(game->mlx);
 		}
 		printf("moves: %d\n", game->total_moves);
 	}
-	else
-		printf("Include a phase to when the character heats the wall\n");//TO DO
 	return (game);
 }
 
-t_game	*move_down(t_game	*game)
+static t_game	*move_down(t_game	*game)
 {
 	if (game->map[game->player_position_x + 1][game->player_position_y] != '1')
 	{
@@ -72,19 +58,13 @@ t_game	*move_down(t_game	*game)
 		{
 			disable_image(game);
 			game->images->player_dead->instances->enabled = true;
-			// sleep(10);
-			// mlx_close_window(game->mlx);
 		}
 		printf("moves: %d\n", game->total_moves);
-	}
-	else
-	{
-		printf("Include a phase to when the character heats the wall\n");//TO DO
 	}
 	return (game);
 }
 
-t_game	*move_right(t_game	*game)
+static t_game	*move_right(t_game	*game)
 {
 	if (game->map[game->player_position_x][game->player_position_y + 1] != '1')
 	{
@@ -104,17 +84,13 @@ t_game	*move_right(t_game	*game)
 		{
 			disable_image(game);
 			game->images->player_dead->instances->enabled = true;
-			// sleep(10);
-			// mlx_close_window(game->mlx);
 		}
 		printf("moves: %d\n", game->total_moves);
 	}
-	else
-		printf("Include a phase to when the character heats the wall\n");//TO DO
 	return (game);
 }
 
-t_game	*move_left(t_game	*game)
+static t_game	*move_left(t_game	*game)
 {
 	if (game->map[game->player_position_x][game->player_position_y - 1] != '1')
 	{
@@ -134,8 +110,6 @@ t_game	*move_left(t_game	*game)
 		{
 			disable_image(game);
 			game->images->player_dead->instances->enabled = true;
-			// sleep(10);
-			// mlx_close_window(game->mlx);
 		}
 		printf("moves: %d\n", game->total_moves);
 	}
@@ -149,18 +123,16 @@ void	ft_hook_moves(mlx_key_data_t key_data, void *mlx)
 	game = (t_game *)mlx;
 	if (key_data.key == MLX_KEY_ESCAPE && key_data.action == MLX_PRESS)
 		mlx_close_window(game->mlx);
-	if (!game->images->player_dead->instances->enabled) {
-		if ((key_data.key == MLX_KEY_UP || key_data.key == MLX_KEY_W )
-			&& key_data.action == MLX_PRESS)
+	if (!game->images->player_dead->instances->enabled
+		&& key_data.action == MLX_PRESS)
+	{
+		if ((key_data.key == MLX_KEY_UP || key_data.key == MLX_KEY_W))
 			move_up(game);
-		if ((key_data.key == MLX_KEY_DOWN || key_data.key == MLX_KEY_S )
-			&& key_data.action == MLX_PRESS)
+		if ((key_data.key == MLX_KEY_DOWN || key_data.key == MLX_KEY_S))
 			move_down(game);
-		if ((key_data.key == MLX_KEY_RIGHT || key_data.key == MLX_KEY_D )
-			&& key_data.action == MLX_PRESS)
+		if ((key_data.key == MLX_KEY_RIGHT || key_data.key == MLX_KEY_D))
 			move_right(game);
-		if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A )
-			&& key_data.action == MLX_PRESS)
+		if ((key_data.key == MLX_KEY_LEFT || key_data.key == MLX_KEY_A))
 			move_left(game);
 	}
 	print_moves(game);

@@ -6,50 +6,13 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 13:16:32 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 15:11:39 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	print_map(char **map) //TO DO remove function
-{
-	int	i;
-
-	i = 0;
-	printf("after reading map:\n");
-	while (map[i] != NULL)
-	{
-		printf("%s", map[i]);
-		i++;
-	}
-}
-
-int	count_rows(const char *argv) //TODO - check if stays here or move to a utils file
-{
-	int		nb_lines;
-	int		fd;
-	char	*line;
-
-	fd = open(argv, O_RDONLY);
-	if (fd < 0)
-		exit_error("Nonexistent map");
-	line = get_next_line(fd);
-	if (line == NULL)
-		exit_error("Empty map");
-	//checar qual o minimo de rows (talvez 3) em um valid map e se preciso fazer validation
-	nb_lines = 0;
-	while (line != NULL)
-	{
-		nb_lines++;
-		free(line);
-		line = get_next_line(fd);
-	}
-	printf("number lines = %d\n", nb_lines);
-	return (nb_lines);
-}
-
-void	read_map(char **map, const char *argv)
+static void	read_map(char **map, const char *argv)
 {
 	int		fd;
 	int		i;
@@ -71,7 +34,7 @@ void	read_map(char **map, const char *argv)
 	close(fd);
 }
 
-t_image	*initialize_images_data(mlx_t	*mlx)
+static t_image	*initialize_images_data(mlx_t	*mlx)
 {
 	t_image	*images;
 
@@ -83,7 +46,6 @@ t_image	*initialize_images_data(mlx_t	*mlx)
 	images = load_player_texture(mlx, images);
 	images = load_collectable_texture(mlx, images);
 	images = load_exit_texture(mlx, images);
-	images = load_open_exit_texture(mlx, images);
 	images = load_player_right_texture(mlx, images);
 	images = load_player_left_texture(mlx, images);
 	images = load_enemy_texture(mlx, images);

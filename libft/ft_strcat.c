@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   error_utils.c                                      :+:    :+:            */
+/*   ft_strcat.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2024/04/09 17:36:43 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 14:29:20 by natalia       ########   odam.nl         */
+/*   Created: 2024/04/19 14:38:34 by natalia       #+#    #+#                 */
+/*   Updated: 2024/04/19 15:00:27 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-int	error(char *error_message)
+char	*ft_strcat(char *dest, const char *src)
 {
-	ft_putendl_fd(2, "Error");
-	ft_putendl_fd(2, error_message);
-	return (1);
-}
+	int	i;
+	int	j;
 
-void	exit_error(char *error_message)
-{
-	error(error_message);
-	exit (EXIT_FAILURE);
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	j = 0;
+	while (src[j] != '\0')
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
 }

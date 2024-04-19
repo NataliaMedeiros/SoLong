@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   initialize_game.c                                  :+:    :+:            */
+/*   initialize_game_data.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 14:48:18 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 13:12:02 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 15:13:47 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	set_player_position(t_game	**game)
+static void	set_player_position(t_game	**game)
 {
 	int	x;
 	int	y;

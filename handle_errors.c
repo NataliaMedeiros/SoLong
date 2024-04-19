@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 11:35:17 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 13:01:46 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 15:05:02 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	check_map_extention(char *argv)
 	return (true);
 }
 
-int	count_component(char **map, char c)
+static int	count_component(char **map, char c)
 {
 	int	i;
 	int	j;
@@ -44,7 +44,7 @@ int	count_component(char **map, char c)
 	return (nb);
 }
 
-bool	valid_wall_and_components(char **map)
+static bool	valid_wall_and_components(char **map)
 {
 	int	i;
 	int	j;
@@ -69,7 +69,7 @@ bool	valid_wall_and_components(char **map)
 	return (true);
 }
 
-bool	check_map_shape(char **map)
+static bool	check_map_shape(char **map)
 {
 	int		i;
 	size_t	len;

@@ -6,7 +6,7 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 10:35:18 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/19 13:14:53 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 14:17:23 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_image	*load_collectable_texture(mlx_t *mlx, t_image *image)
 t_image	*load_exit_texture(mlx_t *mlx, t_image *image)
 {
 	mlx_texture_t	*exit;
+	mlx_texture_t	*open_exit;
 
 	exit = mlx_load_png("./images/closed_door.png");
 	if (!(exit))
@@ -65,13 +66,6 @@ t_image	*load_exit_texture(mlx_t *mlx, t_image *image)
 	if (!image->exit)
 		exit_error("Problem closed door texture to image");
 	mlx_delete_texture (exit);
-	return (image);
-}
-
-t_image	*load_open_exit_texture(mlx_t *mlx, t_image *image)
-{
-	mlx_texture_t	*open_exit;
-
 	open_exit = mlx_load_png("./images/open_door.png");
 	if (!open_exit)
 		exit_error("Problem loading open door image");

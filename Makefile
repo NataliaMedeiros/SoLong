@@ -15,6 +15,7 @@ FILES = so_long.c \
 		initialize_game_data.c \
 		check_path.c \
 		print_on_screen.c \
+		utils.c \
 
 #BONUS_FILES =
 
