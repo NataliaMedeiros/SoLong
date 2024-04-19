@@ -6,21 +6,20 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 11:35:17 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 19:48:40 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 13:01:46 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_map_extention(char *argv)
+bool	check_map_extention(char *argv)
 {
 	char	*str;
-	char	*error_message;
 
-	error_message = "Incorrect file type";
 	str = ft_strchr(argv, '.');
 	if (str == NULL || (ft_strcmp(str, ".ber")) != 0)
-		exit_error(error_message);
+		return (false);
+	return (true);
 }
 
 int	count_component(char **map, char c)

@@ -8,10 +8,11 @@ FILES = so_long.c \
 		free_utils.c \
 		error_utils.c \
 		textures.c \
+		textures_character.c \
 		fill_images.c \
 		movements.c \
 		game_checker.c \
-		initialize_game.c \
+		initialize_game_data.c \
 		check_path.c \
 		print_on_screen.c \
 

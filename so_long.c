@@ -6,11 +6,24 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 19:56:38 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 13:16:32 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	print_map(char **map) //TO DO remove function
+{
+	int	i;
+
+	i = 0;
+	printf("after reading map:\n");
+	while (map[i] != NULL)
+	{
+		printf("%s", map[i]);
+		i++;
+	}
+}
 
 int	count_rows(const char *argv) //TODO - check if stays here or move to a utils file
 {
@@ -32,6 +45,7 @@ int	count_rows(const char *argv) //TODO - check if stays here or move to a utils
 		free(line);
 		line = get_next_line(fd);
 	}
+	printf("number lines = %d\n", nb_lines);
 	return (nb_lines);
 }
 
@@ -70,25 +84,12 @@ t_image	*initialize_images_data(mlx_t	*mlx)
 	images = load_collectable_texture(mlx, images);
 	images = load_exit_texture(mlx, images);
 	images = load_open_exit_texture(mlx, images);
-	images = load_yeow_texture(mlx, images); //TODO if don't work delete
-	images = load_walk_player_texture(mlx, images);
+	images = load_player_right_texture(mlx, images);
 	images = load_player_left_texture(mlx, images);
 	images = load_enemy_texture(mlx, images);
 	images = load_player_dead_texture(mlx, images);
+	images = load_game_over_texture(mlx, images);
 	return (images);
-}
-
-void	print_map(char **map) //TO DO remove function
-{
-	int	i;
-
-	i = 0;
-	printf("after reading map:\n");
-	while (map[i] != NULL)
-	{
-		printf("%s", map[i]);
-		i++;
-	}
 }
 
 int	main(int argc, char **argv)
@@ -96,33 +97,25 @@ int	main(int argc, char **argv)
 	char	**map;
 	t_game	*game;
 
-	if (argc != 2)
-		exit_error("No input");
-	check_map_extention(argv[1]);
+	if (argc != 2 || (!check_map_extention(argv[1])))
+		exit_error("Check file: no input or incorret file type");
 	map = ft_calloc((count_rows(argv[1]) + 1), sizeof(char *));
 	if (!map)
-		return (EXIT_FAILURE);
+		exit_error("Fail to allocate memory to map");
 	read_map(map, argv[1]);
-	if (!valid_map(map))
-		return (free_array(map), EXIT_FAILURE);
-	game = ft_calloc(1, sizeof(t_game));
+	game = initialize_game_data(map);
 	if (game == NULL)
 		return (free_array(map), EXIT_FAILURE);
-	initialize_game_data(&game, map);
-	if (!valid_path(game))
-		return (free_array(map), free(game), EXIT_FAILURE);
 	game->mlx = mlx_init((game)->width * PIXELS, (game)->height * PIXELS,
 			"SoLong", false);
 	if (!(game)->mlx)
-		free_array_and_exit(map);
+		return (free_array(map), free(game), EXIT_FAILURE);
 	game->images = initialize_images_data(game->mlx);
 	if (!game->images)
 		return (free_array(map), free_node(&game), EXIT_FAILURE);
 	fill_background_and_component(game);
-	// fill_components(game);
-	string_to_screen(game);
 	mlx_key_hook(game->mlx, ft_hook_moves, game);
 	mlx_loop(game->mlx);
 	mlx_terminate(game->mlx);
-	return (free(game->images), free_array(map), free(game), EXIT_FAILURE);
+	return (free(game->images), free_array(map), free(game), EXIT_SUCCESS);
 }

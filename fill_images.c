@@ -6,11 +6,26 @@
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 13:56:45 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/18 19:57:14 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/19 11:09:17 by natalia       ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void	string_to_screen(t_game *game)
+{
+	char	*temp;
+	char	colected_print[20];
+
+	temp = ft_itoa(game->total_collectable);
+	strcpy(colected_print, "Collected: 0/");
+	strcat(colected_print, temp);
+	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",
+			16, game->height * 64 - 350);
+	game->images->collected_print = mlx_put_string(game->mlx, colected_print,
+			16, game->height * 64 - 370);
+	free(temp);
+}
 
 void	load_component_images(t_game *game, int width, int height)
 {
@@ -40,7 +55,7 @@ void	load_component_images(t_game *game, int width, int height)
 	}
 }
 
-void	fill_players_images(t_game *game)
+static void	fill_players_images(t_game *game)
 {
 	int	width;
 	int	height;
@@ -64,25 +79,6 @@ void	fill_players_images(t_game *game)
 	game->images->player_dead->instances->enabled = false;
 }
 
-// void	fill_components(t_game	*game)
-// {
-// 	int		width;
-// 	int		height;
-
-// 	height = 0;
-// 	while (height < game->height)
-// 	{
-// 		width = 0;
-// 		while (width < game->width)
-// 		{
-// 			load_component_images(game, width, height);
-// 			width++;
-// 		}
-// 		height++;
-// 	}
-// 	fill_players_images(game);
-// }
-
 void	fill_background_and_component(t_game *data)
 {
 	int		width;
@@ -104,26 +100,6 @@ void	fill_background_and_component(t_game *data)
 		height++;
 	}
 	fill_players_images(data);
+	string_to_screen(data);
 }
 
-void	string_to_screen(t_game *game)
-{
-	char	*temp;
-	char	colected_print[20];
-
-	temp = ft_itoa(game->total_collectable);
-	strcpy(colected_print, "Collected: 0/");
-	strcat(colected_print, temp);
-	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",
-			16, game->height * 64 - 350);
-	game->images->collected_print = mlx_put_string(game->mlx, colected_print,
-			16, game->height * 64 - 370);
-	free(temp);
-}
-
-// void	fill_images(t_game *game)
-// {
-// 	fill_background(game);
-// 	fill_components(game);
-// 	fill_players_images(game);
-// }
