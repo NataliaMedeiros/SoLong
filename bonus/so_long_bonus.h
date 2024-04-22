@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   so_long.h                                          :+:    :+:            */
+/*   so_long_bonus.h                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:29 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/22 12:28:38 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/22 12:24:20 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
-# include "MLX42/include/MLX42/MLX42.h"
-# include "libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -29,8 +29,17 @@ typedef struct s_image
 	mlx_image_t	*floor;
 	mlx_image_t	*wall;
 	mlx_image_t	*player;
+	mlx_image_t	*player_right;
+	mlx_image_t	*player_left;
+	mlx_image_t	*player_dead;
+	mlx_image_t	*enemy;
 	mlx_image_t	*collectable;
 	mlx_image_t	*exit;
+	mlx_image_t	*open_exit;
+	mlx_image_t	*moves_print;
+	mlx_image_t	*collected_print;
+	mlx_image_t	*winner_message;
+	mlx_image_t	*game_over;
 }				t_image;
 
 typedef struct s_game

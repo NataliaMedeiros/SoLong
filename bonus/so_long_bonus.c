@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   so_long.c                                          :+:    :+:            */
+/*   so_long_bonus.c                                    :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/09 10:52:38 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/22 12:14:05 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/22 12:14:43 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 static void	read_map(char **map, const char *argv)
 {

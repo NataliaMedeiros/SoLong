@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   game_checker.c                                     :+:    :+:            */
+/*   game_checker_bonus.c                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/14 12:36:28 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/22 12:36:13 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/22 12:36:03 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	look_for_collectable(int height, int width, t_game *game)
 {
@@ -34,10 +34,27 @@ void	look_for_collectable(int height, int width, t_game *game)
 	}
 }
 
+bool	hit_on_enemy(t_game *game, int height, int width)
+{
+	if (game->map[height][width] == 'D')
+	{
+		if (mlx_image_to_window(game->mlx, game->images->game_over,
+				(width * PIXELS + 296) / 2, (height * PIXELS + 140) / 2) < 0)
+			error("Failed to put image to window");
+		return (true);
+	}
+	return (false);
+}
+
 void	collected_all_collectable(t_game *game)
 {
 	if (game->collected_collectables == game->total_collectable)
 	{
+		mlx_delete_image(game->mlx, game->images->exit);
+		if (mlx_image_to_window(game->mlx, game->images->open_exit,
+				game->exit_position_y * PIXELS,
+				game->exit_position_x * PIXELS) < 0)
+			error("Failed to put image to window");
 		if (game->exit_position_y == game->player_position_y
 			&& game->exit_position_x == game->player_position_x)
 		{

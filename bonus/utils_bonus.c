@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   utils.c                                            :+:    :+:            */
+/*   utils_bonus.c                                      :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/19 14:28:55 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/22 12:19:14 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/22 12:27:39 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	height_map(char **map)
 {
@@ -41,6 +41,15 @@ int	count_rows(const char *argv)
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("number lines = %d\n", nb_lines);
 	return (nb_lines);
+}
+
+void	disable_image(t_game *game)
+{
+	if (game->images->player->instances->enabled == true)
+		game->images->player->instances->enabled = false;
+	if (game->images->player_right->instances->enabled == true)
+		game->images->player_right->instances->enabled = false;
+	if (game->images->player_left->instances->enabled == true)
+		game->images->player_left->instances->enabled = false;
 }

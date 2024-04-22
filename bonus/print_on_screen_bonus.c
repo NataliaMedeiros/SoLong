@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   print_on_screen.c                                  :+:    :+:            */
+/*   print_on_screen_bonus.c                            :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/18 12:34:13 by nmedeiro      #+#    #+#                 */
-/*   Updated: 2024/04/19 16:06:00 by natalia       ########   odam.nl         */
+/*   Updated: 2024/04/22 12:27:30 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	string_to_screen(t_game *game)
 {
@@ -18,7 +18,6 @@ void	string_to_screen(t_game *game)
 	char	colected_print[20];
 
 	temp = ft_itoa(game->total_collectable);
-	printf("temp = %s\n", temp);
 	ft_strcpy(colected_print, "Collected: 0/");
 	ft_strcat(colected_print, temp);
 	game->images->moves_print = mlx_put_string(game->mlx, "Moves: 0",

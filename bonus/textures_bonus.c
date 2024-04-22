@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   textures.c                                         :+:    :+:            */
+/*   textures_bonus.c                                   :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: natalia <natalia@student.42.fr>              +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2024/04/12 10:35:18 by natalia       #+#    #+#                 */
-/*   Updated: 2024/04/22 12:19:03 by nmedeiro      ########   odam.nl         */
+/*   Updated: 2024/04/22 11:32:04 by nmedeiro      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 t_image	*load_floor_texture(mlx_t *mlx, t_image *image)
 {
@@ -57,6 +57,7 @@ t_image	*load_collectable_texture(mlx_t *mlx, t_image *image)
 t_image	*load_exit_texture(mlx_t *mlx, t_image *image)
 {
 	mlx_texture_t	*exit;
+	mlx_texture_t	*open_exit;
 
 	exit = mlx_load_png("./images/closed_door.png");
 	if (!(exit))
@@ -65,6 +66,26 @@ t_image	*load_exit_texture(mlx_t *mlx, t_image *image)
 	if (!image->exit)
 		exit_error("Problem closed door texture to image");
 	mlx_delete_texture (exit);
+	open_exit = mlx_load_png("./images/open_door.png");
+	if (!open_exit)
+		exit_error("Problem loading open door image");
+	image->open_exit = mlx_texture_to_image(mlx, open_exit);
+	if (!image->open_exit)
+		exit_error("Problem open door texture to image");
+	mlx_delete_texture (open_exit);
 	return (image);
 }
 
+t_image	*load_game_over_texture(mlx_t *mlx, t_image *image)
+{
+	mlx_texture_t	*enemy;
+
+	enemy = mlx_load_png("./images/game_over2.png");
+	if (!enemy)
+		exit_error("Problem loading game over image");
+	image->game_over = mlx_texture_to_image(mlx, enemy);
+	if (!image->game_over)
+		exit_error("Problem game over texture to image");
+	mlx_delete_texture (enemy);
+	return (image);
+}
